@@ -1,32 +1,56 @@
 # 🔄 Migration Agent: C# Azure Functions → Java
 
-Agente especializado en migración de Azure Functions de **C# a Java** con máxima fidelidad funcional y best practices.
+Agente especializado en migración de Azure Functions de **C# a Java** con máxima fidelidad funcional, best practices y Azure Functions CLI integration.
+
+**Disponible en:** 🐧 Linux | 🍎 macOS | 🪟 Windows
 
 ---
 
-## ⭐ **MIGRACIÓN AUTOMÁTICA NUEVA**
+## ⭐ **MIGRACIÓN AUTOMÁTICA COMPLETA v2.1**
 
 ### El Comando Magic ✨
 
 ```
-@csharp-to-java-migrator migra todo automaticamente
+@csharp-to-java-migrator migra todo con func init
 ```
 
 **Esto hace automáticamente:**
 
-1. 📂 Lista tu proyecto completo
-2. 📁 Crea directorio `[ProjectName]-migrated/`
-3. 🔍 Analiza toda tu función C#
-4. 🔄 Traduce todos los .cs → .java
-5. ⚙️ Genera pom.xml y configuraciones
-6. 🧪 Migra tests (xUnit → JUnit 5)
-7. ✅ Valida y compila automáticamente
-8. 📚 Genera documentación completa
-9. 🎉 Muestra progreso en tiempo real
+1. 📂 Lee el proyecto C#
+2. 🔍 Extrae nombre y dependencias del .csproj
+3. 🚀 Ejecuta: `func init [nombre] --worker-runtime java`
+4. 📋 Extrae lista de funciones (names de [FunctionName])
+5. 🔄 Por cada function ejecuta: `func new --name [nombre] --template [tipo]`
+6. ⚙️ Migra código C# → Java (async/await, LINQ, triggers, etc)
+7. 🧪 Migra tests xUnit → JUnit 5
+8. 📦 Actualiza pom.xml con todas las dependencias mapeadas
+9. ✅ Compila con Maven y ejecuta tests
+10. 📚 Genera reportes completos
 
-**Resultado:** Todo migrado en ~85 minutos, automáticamente.
+**Resultado:** Proyecto Java Functions completamente funcional en ~90-125 minutos
 
-**Ahorro de tiempo:** 7.5 horas → 85 minutos ⚡
+**Ahorro de tiempo:** 8+ horas → ~2 horas ⚡
+
+---
+
+## 🎯 Workflow Completo
+
+**ANTES (Manual - 8+ horas):**
+
+1. Crear estructura Maven manualmente
+2. Crear pom.xml desde cero
+3. Crear cada función .java manualmente
+4. Traducir código .cs → .java
+5. Migrar configuraciones
+6. Crear tests JUnit
+7. Debuggear errores
+8. Compilar y testear
+
+**AHORA (Automático - 90-125 minutos):**
+
+1. `@csharp-to-java-migrator migra todo con func init` ✅
+2. Café ☕
+3. Todo listo para desplegar 🚀
 
 ---
 
@@ -53,7 +77,48 @@ Ctrl + Shift + L (Windows/Linux)
 
 ---
 
-## 📋 Guía Completa de Uso
+## �️ Opción C: Scripts Ejecutables Directos
+
+Si prefieres ejecutar la migración directamente desde terminal (sin Copilot):
+
+### Linux / macOS (Bash)
+
+```bash
+# Desde el directorio raíz del proyecto
+bash .github/skills/azure-functions-cli-integration.skill/migrate-orchestrate.sh /path/to/csharp/project
+
+# Ejemplo
+bash .github/skills/azure-functions-cli-integration.skill/migrate-orchestrate.sh ~/MyPaymentFunctions
+```
+
+### Windows (PowerShell)
+
+```powershell
+# Desde el directorio raíz del proyecto
+.\‌.github\skills\azure-functions-cli-integration.skill\migrate-orchestrate.ps1 -CSharpProjectPath "C:\path\to\csharp\project"
+
+# Ejemplo
+.\‌.github\skills\azure-functions-cli-integration.skill\migrate-orchestrate.ps1 -CSharpProjectPath "C:\MyPaymentFunctions"
+
+# O usar directorio actual
+.\‌.github\skills\azure-functions-cli-integration.skill\migrate-orchestrate.ps1
+```
+
+**Salida en ambos casos:**
+
+```
+migration-20260130_153000/
+├── java-functions/
+│   └── PaymentFunctions/           ← Proyecto Java completo
+├── csharp-backup/                  ← Backup del proyecto C#
+├── migration-20260130_153000.log   ← Log de ejecución
+├── progress.json                   ← Seguimiento de progreso
+└── MIGRATION_REPORT.md             ← Reporte de migración
+```
+
+---
+
+## �📋 Guía Completa de Uso
 
 ### Opción Automática: Migración Completa (⭐ NUEVO)
 
@@ -179,23 +244,24 @@ Ctrl + Shift + L (Windows/Linux)
 
 ---
 
-## 🎯 Prompts Disponibles (13 totales)
+## 🎯 Prompts Disponibles (14 totales)
 
-| #    | Prompt                         | Comando                      | Descripción                 |
-| ---- | ------------------------------ | ---------------------------- | --------------------------- |
-| 🚀   | **orchestrate-full-migration** | `migra todo automaticamente` | ⭐ **MIGRACIÓN AUTOMÁTICA** |
-| 1️⃣   | analyze-csharp-function        | `analiza función`            | Analiza estructura C#       |
-| 2️⃣   | translate-csharp-to-java       | `traduce código`             | Convierte a Java            |
-| 3️⃣   | migrate-http-trigger           | `migra http trigger`         | HTTP bindings               |
-| 4️⃣   | migrate-timer-trigger          | `migra timer trigger`        | Timer triggers              |
-| 5️⃣   | migrate-queue-trigger          | `migra queue trigger`        | Queue triggers              |
-| 6️⃣   | migrate-cosmos-trigger         | `migra cosmos trigger`       | Cosmos DB triggers          |
-| 7️⃣   | migrate-dependencies           | `migra dependencias`         | NuGet → Maven               |
-| 8️⃣   | generate-pom-xml               | `genera pom`                 | Crea pom.xml                |
-| 9️⃣   | migrate-configuration          | `migra configuración`        | appsettings → properties    |
-| 🔟   | migrate-testing                | `migra tests`                | xUnit → JUnit 5             |
-| 1️⃣1️⃣ | migrate-exception-handling     | `migra excepciones`          | Manejo de errores           |
-| 1️⃣2️⃣ | migration-report               | `genera reporte`             | Reporte completo            |
+| #    | Prompt                         | Comando                      | Descripción                     |
+| ---- | ------------------------------ | ---------------------------- | ------------------------------- |
+| 🚀   | **orchestrate-func-init**      | `migra todo con func init`   | ⭐ **NUEVA: CON func init/new** |
+| 🚀   | **orchestrate-full-migration** | `migra todo automaticamente` | Migración automática (legacy)   |
+| 1️⃣   | analyze-csharp-function        | `analiza función`            | Analiza estructura C#           |
+| 2️⃣   | translate-csharp-to-java       | `traduce código`             | Convierte a Java                |
+| 3️⃣   | migrate-http-trigger           | `migra http trigger`         | HTTP bindings                   |
+| 4️⃣   | migrate-timer-trigger          | `migra timer trigger`        | Timer triggers                  |
+| 5️⃣   | migrate-queue-trigger          | `migra queue trigger`        | Queue triggers                  |
+| 6️⃣   | migrate-cosmos-trigger         | `migra cosmos trigger`       | Cosmos DB triggers              |
+| 7️⃣   | migrate-dependencies           | `migra dependencias`         | NuGet → Maven                   |
+| 8️⃣   | generate-pom-xml               | `genera pom`                 | Crea pom.xml                    |
+| 9️⃣   | migrate-configuration          | `migra configuración`        | appsettings → properties        |
+| 🔟   | migrate-testing                | `migra tests`                | xUnit → JUnit 5                 |
+| 1️⃣1️⃣ | migrate-exception-handling     | `migra excepciones`          | Manejo de errores               |
+| 1️⃣2️⃣ | migration-report               | `genera reporte`             | Reporte completo                |
 
 ---
 
@@ -936,10 +1002,12 @@ Cuando ejecutas `@csharp-to-java-migrator migra todo automaticamente`:
 
 ---
 
-**Versión**: 2.0 (Con migración automática)  
+**Versión**: 2.1 (Con soporte cross-platform: Bash + PowerShell)  
 **Última actualización**: 30 de enero, 2026  
 **Status**: Producción ✅  
-**Total de Líneas**: 2,800+  
-**Prompts**: 13  
+**Total de Líneas**: 3,000+  
+**Prompts**: 14  
 **Skills**: 2  
-**Tiempo de Migración**: ~85 minutos (automático)
+**Scripts**: 2 (Bash para Linux/macOS, PowerShell para Windows)  
+**Tiempo de Migración**: ~90-125 minutos (automático)  
+**Plataformas Soportadas**: 🐧 Linux | 🍎 macOS | 🪟 Windows

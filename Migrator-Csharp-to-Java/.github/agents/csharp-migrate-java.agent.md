@@ -24,36 +24,38 @@ Convierto tus **Azure Functions en C#** a **Azure Functions en Java** manteniend
 
 ## 📋 PROMPTS (Tareas de Migración)
 
-| #    | Prompt                         | Descripción                                     | Comando                                         |
-| ---- | ------------------------------ | ----------------------------------------------- | ----------------------------------------------- |
-| 🚀   | **orchestrate-full-migration** | ⭐ MIGRACIÓN AUTOMÁTICA COMPLETA                | `@csharp-to-java-migrator migra todo`           |
-| 1️⃣   | **analyze-csharp-function**    | Analiza función C# existente                    | `@csharp-to-java-migrator analiza función`      |
-| 2️⃣   | **translate-csharp-to-java**   | Traduce código C# a Java                        | `@csharp-to-java-migrator traduce código`       |
-| 3️⃣   | **migrate-http-trigger**       | Migra funciones HTTP trigger                    | `@csharp-to-java-migrator migra http trigger`   |
-| 4️⃣   | **migrate-timer-trigger**      | Migra funciones Timer trigger                   | `@csharp-to-java-migrator migra timer trigger`  |
-| 5️⃣   | **migrate-queue-trigger**      | Migra funciones Queue trigger                   | `@csharp-to-java-migrator migra queue trigger`  |
-| 6️⃣   | **migrate-cosmos-trigger**     | Migra funciones Cosmos trigger                  | `@csharp-to-java-migrator migra cosmos trigger` |
-| 7️⃣   | **migrate-dependencies**       | Migra dependencias y NuGet → Maven              | `@csharp-to-java-migrator migra deps`           |
-| 8️⃣   | **generate-pom-xml**           | Genera pom.xml desde .csproj                    | `@csharp-to-java-migrator genera pom`           |
-| 9️⃣   | **migrate-configuration**      | Migra appsettings.json → application.properties | `@csharp-to-java-migrator migra config`         |
-| 🔟   | **migrate-testing**            | Migra tests de xUnit a JUnit                    | `@csharp-to-java-migrator migra tests`          |
-| 1️⃣1️⃣ | **migrate-exception-handling** | Migra manejo de excepciones                     | `@csharp-to-java-migrator migra excepciones`    |
-| 1️⃣2️⃣ | **migration-report**           | Genera reporte completo de migración            | `@csharp-to-java-migrator genera reporte`       |
+| #    | Prompt                         | Descripción                                     | Comando                                             |
+| ---- | ------------------------------ | ----------------------------------------------- | --------------------------------------------------- |
+| 🚀   | **orchestrate-func-init**      | ⭐ MIGRACIÓN COMPLETA CON func init/new         | `@csharp-to-java-migrator migra todo con func init` |
+| 🚀   | **orchestrate-full-migration** | ⭐ MIGRACIÓN AUTOMÁTICA COMPLETA (legacy)       | `@csharp-to-java-migrator migra todo`               |
+| 1️⃣   | **analyze-csharp-function**    | Analiza función C# existente                    | `@csharp-to-java-migrator analiza función`          |
+| 2️⃣   | **translate-csharp-to-java**   | Traduce código C# a Java                        | `@csharp-to-java-migrator traduce código`           |
+| 3️⃣   | **migrate-http-trigger**       | Migra funciones HTTP trigger                    | `@csharp-to-java-migrator migra http trigger`       |
+| 4️⃣   | **migrate-timer-trigger**      | Migra funciones Timer trigger                   | `@csharp-to-java-migrator migra timer trigger`      |
+| 5️⃣   | **migrate-queue-trigger**      | Migra funciones Queue trigger                   | `@csharp-to-java-migrator migra queue trigger`      |
+| 6️⃣   | **migrate-cosmos-trigger**     | Migra funciones Cosmos trigger                  | `@csharp-to-java-migrator migra cosmos trigger`     |
+| 7️⃣   | **migrate-dependencies**       | Migra dependencias y NuGet → Maven              | `@csharp-to-java-migrator migra deps`               |
+| 8️⃣   | **generate-pom-xml**           | Genera pom.xml desde .csproj                    | `@csharp-to-java-migrator genera pom`               |
+| 9️⃣   | **migrate-configuration**      | Migra appsettings.json → application.properties | `@csharp-to-java-migrator migra config`             |
+| 🔟   | **migrate-testing**            | Migra tests de xUnit a JUnit                    | `@csharp-to-java-migrator migra tests`              |
+| 1️⃣1️⃣ | **migrate-exception-handling** | Migra manejo de excepciones                     | `@csharp-to-java-migrator migra excepciones`        |
+| 1️⃣2️⃣ | **migration-report**           | Genera reporte completo de migración            | `@csharp-to-java-migrator genera reporte`           |
 
 ---
 
 ## 🎯 SKILLS (Capacidades Especializadas)
 
-| Skill                      | Descripción                             | Cuándo usar                                     |
-| -------------------------- | --------------------------------------- | ----------------------------------------------- |
-| **csharp-analyzer**        | Análisis profundo de código C#          | Cuando necesitas entender el código C#          |
-| **java-translator**        | Traducción experta C# → Java idiomático | Cuando necesitas convertir código               |
-| **azure-functions-mapper** | Mapeo de conceptos Azure Functions      | Para entender equivalentes en ambos lados       |
-| **dependency-mapper**      | Mapeo NuGet ↔ Maven inteligente         | Para resolver dependencias automáticamente      |
-| **testing-migrator**       | Migración de tests xUnit → JUnit 5      | Para tests funcionales y coverage               |
-| **orchestration-engine**   | ⭐ Motor de orquestación automática     | Controla flujo completo de migración            |
-| **validation-coordinator** | Validación en tiempo real de código     | Asegura compilación y funcionalidad             |
-| **progress-tracker**       | Seguimiento granular de progreso        | Muestra estado en tiempo real durante migración |
+| Skill                               | Descripción                             | Cuándo usar                                     |
+| ----------------------------------- | --------------------------------------- | ----------------------------------------------- |
+| **azure-functions-cli-integration** | Integración con func init/new CLI       | Para inicializar y crear functions en Java      |
+| **csharp-analyzer**                 | Análisis profundo de código C#          | Cuando necesitas entender el código C#          |
+| **java-translator**                 | Traducción experta C# → Java idiomático | Cuando necesitas convertir código               |
+| **azure-functions-mapper**          | Mapeo de conceptos Azure Functions      | Para entender equivalentes en ambos lados       |
+| **dependency-mapper**               | Mapeo NuGet ↔ Maven inteligente         | Para resolver dependencias automáticamente      |
+| **testing-migrator**                | Migración de tests xUnit → JUnit 5      | Para tests funcionales y coverage               |
+| **orchestration-engine**            | ⭐ Motor de orquestación automática     | Controla flujo completo de migración            |
+| **validation-coordinator**          | Validación en tiempo real de código     | Asegura compilación y funcionalidad             |
+| **progress-tracker**                | Seguimiento granular de progreso        | Muestra estado en tiempo real durante migración |
 
 ---
 
@@ -332,12 +334,28 @@ BEFORE any migration:
 5. Create backup of original files
 ```
 
-### Smart Routing Logic (v2.0)
+### Smart Routing Logic (v2.1)
 
 ```
+IF petición menciona "func init" OR "func new" OR "azure functions cli"
+   OR (("migra todo" OR "automaticamente" OR "orchestrate" OR "completa") AND "func")
+   → TRIGGER: orchestrate-func-init.prompt.md
+   → MODE: CLI-based orchestration with func init/new
+   → SEQUENCE:
+      1. Analyze C# project
+      2. Extract functions from .csproj
+      3. Run: func init [project] --worker-runtime java
+      4. For each function: func new --name [name] --template [type]
+      5. Migrate code and tests
+      6. Maven compile & test
+   → OUTPUT: Complete Java Functions project ready to deploy
+   → VALIDATION: Multi-checkpoint validation with func CLI integration
+   → FALLBACK: Continue with manual setup if func CLI fails
+
 IF petición menciona "migra todo" OR "automaticamente" OR "orchestrate" OR "completa"
+   AND NOT menciona "func"
    → TRIGGER: orchestrate-full-migration.prompt.md
-   → MODE: Parallel execution with progress tracking
+   → MODE: Parallel execution with progress tracking (legacy)
    → OUTPUT: Full migrated project directory
    → VALIDATION: Multi-checkpoint validation pipeline
    → FALLBACK: Granular error recovery with rollback
@@ -483,9 +501,13 @@ Checkpoint 7: After test execution
 
 ---
 
-**Agent Version:** 2.0 (Enhanced Orchestration)  
+**Agent Version:** 2.1 (Enhanced with Azure Functions CLI Integration)  
 **Supported Languages:** C# → Java  
-**Target Platform:** Azure Functions Core Tools 4.x+  
-**Minimum Java:** 17+  
-**Execution Model:** Hybrid Parallel/Serial with Multi-Checkpoint Validation  
-**Features:** Auto-retry, rollback support, real-time progress tracking, granular error recovery
+**Target Platform:** Azure Functions Core Tools 4.x+ with Java 17+ runtime  
+**Build Tool:** Maven 3.9+  
+**Execution Model:** Hybrid Parallel/Serial with func init/new CLI integration  
+**Features:** func init, func new, Auto-retry, rollback support, real-time progress tracking, granular error recovery  
+**Skill Location:** `.github/skills/azure-functions-cli-integration.skill/SKILL.md`  
+**Script Location:** `.github/skills/azure-functions-cli-integration.skill/migrate-orchestrate.sh`
+**Script Location:** `.github/skills/azure-functions-cli-integration.skill/migrate-orchestrate.ps1`
+**Documentation:** See SKILL.md for complete implementation details
