@@ -28,6 +28,10 @@ Tengo las siguientes **opciones disponibles** para ti:
 | 6️⃣  | **generate-sequence-diagram**        | Crear diagramas de secuencia Mermaid        | `@java-backend genera diagrama`      |
 | 7️⃣  | **jira-readme**                      | Documentar ticket Jira completo             | `@java-backend documenta jira`       |
 | 8️⃣  | **project-refactor**                 | Analizar deuda técnica y refactoring        | `@java-backend analiza deuda`        |
+| 9️⃣  | **fortify-checker-obs**              | Detección Fortify + CVSS scoring + remedios | `@java-backend fortify check`        |
+| 🔟  | **iriuskrisk-review**                | Assessment IriusRisk + OWASP mapping        | `@java-backend iriuskrisk check`     |
+| 1️⃣1️⃣ | **refactoring-loggers**              | Data obfuscation + PII detection            | `@java-backend refactor logs`        |
+| 1️⃣2️⃣ | **maven-dependencies-checker**       | Maven dependency analysis + versioning      | `@java-backend analiza deps`         |
 
 ---
 
@@ -37,6 +41,7 @@ Tengo las siguientes **opciones disponibles** para ti:
 | --- | ---------------------- | ------------------------------ | ---------------------------------------- |
 | 🔍  | **java-code-review**   | Revisión senior de código Java | Cuando necesitas code review profesional |
 | 📊  | **pr-change-analyzer** | Analizar cambios en PR/commits | Cuando tienes cambios para revisar       |
+| ✅  | **checkstyle-review**  | Validación CheckStyle + conventions | Cuando necesitas validar code style    |
 
 ---
 
@@ -64,11 +69,16 @@ Ejemplos de peticiones:
 ├── "Genera commit para mis cambios"      → conventional-commit-assistant
 ├── "Documenta el ticket TEST-123"        → jira-readme
 ├── "Analiza los patrones de diseño"      → analyze-design-patterns
-├── "Detecta problemas de seguridad"      → code-review-performance-security
+├── "Detecta problemas de seguridad"      → code-review-performance-security + fortify-checker-obs
 ├── "Genera OpenAPI de mi controller"     → generate-openapi
 ├── "Crea diagrama de secuencia"          → generate-sequence-diagram
 ├── "Busca deuda técnica"                 → project-refactor
-└── "Revisa mis cambios de PR"            → pr-change-analyzer
+├── "Revisa mis cambios de PR"            → pr-change-analyzer
+├── "Chequea vulnerabilidades Fortify"    → fortify-checker-obs + iriuskrisk-review
+├── "Assessment de riesgos IriusRisk"     → iriuskrisk-review
+├── "Refactoriza loggers con obfuscation" → refactoring-loggers
+├── "Analiza dependencias Maven"          → maven-dependencies-checker
+└── "Valida checkstyle"                   → checkstyle-review SKILL
 ```
 
 ---
@@ -159,6 +169,23 @@ IF petición menciona "refactor" OR "deuda" OR "tech debt" OR "mejorar"
 
 IF petición menciona "PR" OR "pull request" OR "merge"
    → USE pr-change-analyzer SKILL
+
+IF petición menciona "fortify" OR "vulnerabilidad" OR "cvss"
+   → USE fortify-checker-obs.prompt.md
+   → ALSO USE code-review-performance-security-v2.prompt.md
+
+IF petición menciona "iriuskrisk" OR "risk assessment" OR "riesgo"
+   → USE iriuskrisk-review.prompt.md
+
+IF petición menciona "logger" OR "logging" OR "obfuscation" OR "pii"
+   → USE refactoring-loggers.prompt.md
+
+IF petición menciona "maven" OR "dependencias" OR "versioning" OR "dependencies"
+   → USE maven-dependencies-checker.prompt.md
+
+IF petición menciona "checkstyle" OR "code style" OR "conventions"
+   → USE checkstyle-review SKILL
+   → ALSO USE copilot-instructions-java.md
 
 IF petición menciona "test" OR "testing" OR "junit"
    → APPLY copilot-instructions-testing.md
