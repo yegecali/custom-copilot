@@ -2,7 +2,7 @@
 
 **Domain:** Code Quality & Style Enforcement  
 **Purpose:** Automatically analyze Java code against Checkstyle rules, detect violations, and apply auto-fixes  
-**Scope:** Java source files in the project  
+**Scope:** Java source files in the project
 
 ---
 
@@ -21,6 +21,7 @@ This skill is self-contained and includes all necessary files:
 ```
 
 **Key Features:**
+
 - ✅ Local configuration (no external dependencies)
 - ✅ Automated 6-phase workflow
 - ✅ Auto-fix with Spotless integration
@@ -36,26 +37,31 @@ This skill provides **automated code style validation and correction** using Che
 ### Capabilities
 
 ✅ **Configuration Management**
+
 - Read custom checkstyle.xml rules
 - Parse and understand configuration
 - Support multiple rule sets
 
 ✅ **Code Analysis**
+
 - Scan Java source files
 - Detect style violations
 - Classify by severity
 
 ✅ **Auto-Correction**
+
 - Fix formatting issues automatically
 - Apply style corrections
 - Preserve code logic
 
 ✅ **Reporting**
+
 - Detailed violation reports
 - Grouped by category
 - Before/after comparison
 
 ✅ **Validation**
+
 - Verify fixes don't break code
 - Run unit tests
 - Ensure code integrity
@@ -67,6 +73,7 @@ This skill provides **automated code style validation and correction** using Che
 ### Phase 1-6: Automated Execution Script
 
 This skill includes a complete automation script located at:
+
 - 📝 Configuration: [`.github/skills/checkstyle-review/config/checkstyle.xml`](.github/skills/checkstyle-review/config/checkstyle.xml)
 - 🔧 Script: [`.github/skills/checkstyle-review/scripts/checkstyle-fix.sh`](.github/skills/checkstyle-review/scripts/checkstyle-fix.sh)
 
@@ -92,7 +99,7 @@ chmod +x .github/skills/checkstyle-review/scripts/checkstyle-fix.sh
 **What the script does:**
 
 1. **Phase 1: Verify Configuration** - Loads checkstyle.xml from skill directory
-2. **Phase 2: Analyze Code** - Runs `mvn checkstyle:check` 
+2. **Phase 2: Analyze Code** - Runs `mvn checkstyle:check`
 3. **Phase 3: Parse Violations** - Categorizes and counts issues
 4. **Phase 4: Apply Fixes** - Runs `mvn spotless:apply` (if --fix enabled)
 5. **Phase 5: Validate Fixes** - Re-runs analysis and tests
@@ -127,16 +134,16 @@ The configuration is located at: `.github/skills/checkstyle-review/config/checks
 
   <!-- Tree walker: checks on individual files -->
   <module name="TreeWalker">
-    
+
     <!-- Naming conventions -->
     <module name="TypeName">
       <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
     </module>
-    
+
     <module name="MethodName">
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
-    
+
     <module name="ConstantName">
       <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
     </module>
@@ -185,16 +192,16 @@ The configuration is located at: `.github/skills/checkstyle-review/config/checks
 
 ### Violation Categories
 
-| Category | Examples | Severity | Fixable |
-|----------|----------|----------|---------|
-| **Naming** | Variable names, method names | 🟡 MEDIUM | ✅ Yes |
-| **Whitespace** | Extra spaces, line endings | 🟢 LOW | ✅ Yes |
-| **Indentation** | Incorrect indentation | 🟡 MEDIUM | ✅ Yes |
-| **Import Order** | Unorganized imports | 🟡 MEDIUM | ✅ Yes |
-| **Line Length** | Lines too long | 🟡 MEDIUM | ✅ Partial |
-| **Braces** | Missing/misplaced braces | 🟠 HIGH | ✅ Yes |
-| **Javadoc** | Missing documentation | 🟠 HIGH | 🟔 Partial |
-| **Complexity** | Too complex methods | 🔴 CRITICAL | ❌ No |
+| Category         | Examples                     | Severity    | Fixable    |
+| ---------------- | ---------------------------- | ----------- | ---------- |
+| **Naming**       | Variable names, method names | 🟡 MEDIUM   | ✅ Yes     |
+| **Whitespace**   | Extra spaces, line endings   | 🟢 LOW      | ✅ Yes     |
+| **Indentation**  | Incorrect indentation        | 🟡 MEDIUM   | ✅ Yes     |
+| **Import Order** | Unorganized imports          | 🟡 MEDIUM   | ✅ Yes     |
+| **Line Length**  | Lines too long               | 🟡 MEDIUM   | ✅ Partial |
+| **Braces**       | Missing/misplaced braces     | 🟠 HIGH     | ✅ Yes     |
+| **Javadoc**      | Missing documentation        | 🟠 HIGH     | 🟔 Partial  |
+| **Complexity**   | Too complex methods          | 🔴 CRITICAL | ❌ No      |
 
 ### Severity Levels
 
@@ -235,6 +242,7 @@ LOW       (🟢) - Nice to fix, not blocking
 ```
 
 **Commands:**
+
 ```bash
 # Apply formatting automatically
 mvn spotless:apply
@@ -279,16 +287,18 @@ mvn checkstyle:check -Dcheckstyle.config.location=config/checkstyle/checkstyle.x
 ### Common Violations & Fixes
 
 #### 1. **Line too long**
+
 ```java
 // ❌ VIOLATION: Line exceeds 120 characters
 public static final String VERY_LONG_CONSTANT_NAME = "This is a very long string that exceeds the maximum line length";
 
 // ✅ FIXED
-public static final String VERY_LONG_CONSTANT_NAME = 
+public static final String VERY_LONG_CONSTANT_NAME =
     "This is a very long string that exceeds the maximum line length";
 ```
 
 #### 2. **Incorrect Indentation**
+
 ```java
 // ❌ VIOLATION: Inconsistent indentation
 public class MyClass {
@@ -308,6 +318,7 @@ public class MyClass {
 ```
 
 #### 3. **Missing Whitespace**
+
 ```java
 // ❌ VIOLATION: Missing whitespace around operators
 int result=x+y*2;
@@ -317,6 +328,7 @@ int result = x + y * 2;
 ```
 
 #### 4. **Unorganized Imports**
+
 ```java
 // ❌ VIOLATION: Wrong import order
 import com.example.MyClass;
@@ -332,6 +344,7 @@ import com.example.MyClass;
 ```
 
 #### 5. **Missing Braces**
+
 ```java
 // ❌ VIOLATION: Missing braces on if statement
 if (condition)
@@ -344,6 +357,7 @@ if (condition) {
 ```
 
 #### 6. **Wrong Naming Convention**
+
 ```java
 // ❌ VIOLATION: Variable name doesn't follow camelCase
 int MyVariable = 5;
@@ -355,6 +369,7 @@ public static final int MY_CONSTANT = 10;
 ```
 
 #### 7. **Missing Javadoc**
+
 ```java
 // ❌ VIOLATION: Public method missing Javadoc
 public void processOrder(Order order) {
@@ -441,22 +456,22 @@ mvn integration-test
 
 ## 📋 CHECKSTYLE REPORT TEMPLATE
 
-```markdown
+````markdown
 # 🎯 CHECKSTYLE ANALYSIS REPORT
 
 ## 📊 Summary
 
-| Metric | Count | Status |
-|--------|-------|--------|
-| Total Files Analyzed | X | - |
-| Total Violations | X | 🔴 |
-| **CRITICAL** | X | Action Required |
-| **HIGH** | X | Must Fix |
-| **MEDIUM** | X | Should Fix |
-| **LOW** | X | Nice to Fix |
-| Auto-Fixed | X | ✅ |
-| Manual Review | X | 🔍 |
-| Passing Rate | X% | - |
+| Metric               | Count | Status          |
+| -------------------- | ----- | --------------- |
+| Total Files Analyzed | X     | -               |
+| Total Violations     | X     | 🔴              |
+| **CRITICAL**         | X     | Action Required |
+| **HIGH**             | X     | Must Fix        |
+| **MEDIUM**           | X     | Should Fix      |
+| **LOW**              | X     | Nice to Fix     |
+| Auto-Fixed           | X     | ✅              |
+| Manual Review        | X     | 🔍              |
+| Passing Rate         | X%    | -               |
 
 ## 🔴 CRITICAL ISSUES (Manual Review Required)
 
@@ -473,16 +488,17 @@ private void validateOrder(Order order) { ... }
 private void calculateTotals(Order order) { ... }
 private void saveOrder(Order order) { ... }
 ```
+````
 
 ## 🟠 HIGH PRIORITY (Must Fix)
 
 ### Violations Summary
 
-| Violation | Count | Files |
-|-----------|-------|-------|
-| Missing Javadoc | 12 | OrderService.java, UserService.java |
-| Missing Braces | 8 | PaymentProcessor.java |
-| Line Too Long | 15 | Various files |
+| Violation       | Count | Files                               |
+| --------------- | ----- | ----------------------------------- |
+| Missing Javadoc | 12    | OrderService.java, UserService.java |
+| Missing Braces  | 8     | PaymentProcessor.java               |
+| Line Too Long   | 15    | Various files                       |
 
 ## 🟡 MEDIUM PRIORITY (Should Fix)
 
@@ -506,6 +522,7 @@ private void saveOrder(Order order) { ... }
 ### File: `UserService.java`
 
 **BEFORE:**
+
 ```java
 public class UserService{
     public void createUser(User user){
@@ -516,12 +533,13 @@ public class UserService{
 ```
 
 **AFTER:**
+
 ```java
 /**
  * Service for managing user operations.
  */
 public class UserService {
-    
+
     /**
      * Creates a new user in the system.
      *
@@ -549,7 +567,8 @@ public class UserService {
 3. Refactor complex methods
 4. Run full test suite
 5. Create commit with checkstyle fixes
-```
+
+````
 
 ---
 
@@ -595,7 +614,7 @@ public class UserService {
     </execution>
   </executions>
 </plugin>
-```
+````
 
 **Step 2: Run Analysis**
 
@@ -653,6 +672,7 @@ open target/site/checkstyle.html
 ## ✅ CONSTRAINTS & BEST PRACTICES
 
 **Always:**
+
 - Load configuration before analysis
 - Validate configuration file exists
 - Run tests after applying fixes
@@ -661,6 +681,7 @@ open target/site/checkstyle.html
 - Review CRITICAL issues manually
 
 **Never:**
+
 - Apply fixes without validation
 - Ignore CRITICAL violations
 - Skip test suite after fixes
@@ -760,19 +781,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
-          distribution: 'temurin'
-      
+          java-version: "11"
+          distribution: "temurin"
+
       - name: Make script executable
         run: chmod +x .github/skills/checkstyle-review/scripts/checkstyle-fix.sh
-      
+
       - name: Run Checkstyle Review
         run: ./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh --report
-      
+
       - name: Upload Report
         if: always()
         uses: actions/upload-artifact@v3
@@ -807,10 +828,10 @@ jobs:
 
 ## 🚀 QUICK REFERENCE
 
-| Task | Command |
-|------|---------|
-| **Analysis** | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh` |
-| **Auto-Fix** | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh --fix` |
+| Task            | Command                                                                       |
+| --------------- | ----------------------------------------------------------------------------- |
+| **Analysis**    | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh`                |
+| **Auto-Fix**    | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh --fix`          |
 | **With Report** | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh --fix --report` |
-| **Verbose** | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh --verbose` |
-| **Integration** | Add plugins to `pom.xml` (see section above) |
+| **Verbose**     | `./.github/skills/checkstyle-review/scripts/checkstyle-fix.sh --verbose`      |
+| **Integration** | Add plugins to `pom.xml` (see section above)                                  |
