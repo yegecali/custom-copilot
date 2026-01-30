@@ -3,6 +3,7 @@
 Complete orchestration skill for C# to Java Azure Functions migration using Azure Functions Core Tools (`func init`, `func new`).
 
 **Available for:**
+
 - 🐧 Linux/macOS (Bash script)
 - 🪟 Windows (PowerShell script)
 
@@ -274,6 +275,7 @@ mvn package -DskipTests
 The automated orchestration is handled by two versions:
 
 **Available Scripts:**
+
 - **Bash (Linux/macOS):** `.github/skills/azure-functions-cli-integration.skill/migrate-orchestrate.sh`
 - **PowerShell (Windows):** `.github/skills/azure-functions-cli-integration.skill/migrate-orchestrate.ps1`
 
