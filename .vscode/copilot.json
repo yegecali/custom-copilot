@@ -1,0 +1,42 @@
+{
+  "$schema": "https://github.com/github/copilot-docs/releases/download/copilot-config-schema-v1/schema.json",
+  "description": "GitHub Copilot configuration for custom agents, prompts, skills and instructions",
+
+  "agents": [
+    {
+      "name": "java-backend",
+      "path": ".github/agents/java-backend.agent.md",
+      "description": "Senior Java backend engineer for enterprise and banking systems",
+      "enabled": true
+    }
+  ],
+
+  "prompts": {
+    "location": ".github/prompts",
+    "filePattern": "*.prompt.md",
+    "autoDiscovery": true,
+    "enabled": true
+  },
+
+  "skills": {
+    "location": ".github/skills",
+    "filePattern": "**/SKILL.md",
+    "autoDiscovery": true,
+    "enabled": true
+  },
+
+  "instructions": {
+    "location": ".github/instructions",
+    "filePattern": "*.md",
+    "autoDiscovery": true,
+    "enabled": true
+  },
+
+  "chat": {
+    "defaultAgent": "java-backend",
+    "locale": "es-ES",
+    "enableAutoComplete": true,
+    "enableInlineChat": true,
+    "enableDebugConsole": true
+  }
+}

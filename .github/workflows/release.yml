@@ -1,0 +1,261 @@
+name: Release with Artifacts
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+    paths:
+      - 'version'
+  workflow_dispatch:
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version from file
+        id: version
+        run: |
+          VERSION=$(cat version | tr -d '\n' | xargs)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "📌 Version detected: $VERSION"
+
+      - name: Check if tag already exists
+        id: check_tag
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.VERSION }}" >/dev/null 2>&1; then
+            echo "TAG_EXISTS=true" >> $GITHUB_OUTPUT
+            echo "⚠️  Tag v${{ steps.version.outputs.VERSION }} already exists - skipping release"
+          else
+            echo "TAG_EXISTS=false" >> $GITHUB_OUTPUT
+            echo "✅ Tag v${{ steps.version.outputs.VERSION }} is new - proceeding with release"
+          fi
+
+      - name: Create git tag
+        if: steps.check_tag.outputs.TAG_EXISTS == 'false'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ steps.version.outputs.VERSION }}" -m "🚀 Release v${{ steps.version.outputs.VERSION }}"
+          git push origin "v${{ steps.version.outputs.VERSION }}"
+          echo "✅ Tag v${{ steps.version.outputs.VERSION }} created and pushed"
+
+      - name: Create artifacts directory
+        run: |
+          mkdir -p artifacts/{zips,checksums}
+          echo "📦 Directories created: artifacts/zips artifacts/checksums"
+
+      - name: Compress Java-Backend directory
+        run: |
+          if [ -d "Java-Backend" ]; then
+            echo "🔄 Compressing Java-Backend..."
+            cd Java-Backend
+            zip -r ../artifacts/zips/Java-Backend-v${{ steps.version.outputs.VERSION }}.zip . \
+              -x ".git/*" ".gitignore" "node_modules/*" ".DS_Store" "*.log" "target/*" "*.class" "build/*" ".gradle/*"
+            cd ..
+            SIZE=$(du -h "artifacts/zips/Java-Backend-v${{ steps.version.outputs.VERSION }}.zip" | cut -f1)
+            echo "✅ Java-Backend-v${{ steps.version.outputs.VERSION }}.zip ($SIZE) created"
+          else
+            echo "⚠️  Java-Backend directory not found - skipping"
+          fi
+
+      - name: Compress Migrator-Csharp-to-Java directory
+        run: |
+          if [ -d "Migrator-Csharp-to-Java" ]; then
+            echo "🔄 Compressing Migrator-Csharp-to-Java..."
+            cd Migrator-Csharp-to-Java
+            zip -r ../artifacts/zips/Migrator-Csharp-to-Java-v${{ steps.version.outputs.VERSION }}.zip . \
+              -x ".git/*" ".gitignore" "node_modules/*" ".DS_Store" "*.log" "target/*" "bin/*" "obj/*" ".vs/*" "packages/*"
+            cd ..
+            SIZE=$(du -h "artifacts/zips/Migrator-Csharp-to-Java-v${{ steps.version.outputs.VERSION }}.zip" | cut -f1)
+            echo "✅ Migrator-Csharp-to-Java-v${{ steps.version.outputs.VERSION }}.zip ($SIZE) created"
+          else
+            echo "⚠️  Migrator-Csharp-to-Java directory not found - skipping"
+          fi
+
+      - name: Compress Migrator-Spring-to-Quarkus directory
+        run: |
+          if [ -d "Migrator-Spring-to-Quarkus" ]; then
+            echo "🔄 Compressing Migrator-Spring-to-Quarkus..."
+            cd Migrator-Spring-to-Quarkus
+            zip -r ../artifacts/zips/Migrator-Spring-to-Quarkus-v${{ steps.version.outputs.VERSION }}.zip . \
+              -x ".git/*" ".gitignore" "node_modules/*" ".DS_Store" "*.log" "target/*" ".m2/*" ".gradle/*"
+            cd ..
+            SIZE=$(du -h "artifacts/zips/Migrator-Spring-to-Quarkus-v${{ steps.version.outputs.VERSION }}.zip" | cut -f1)
+            echo "✅ Migrator-Spring-to-Quarkus-v${{ steps.version.outputs.VERSION }}.zip ($SIZE) created"
+          else
+            echo "⚠️  Migrator-Spring-to-Quarkus directory not found - skipping"
+          fi
+
+      - name: Generate SHA256 checksums
+        run: |
+          echo "🔐 Generating SHA256 checksums..."
+          cd artifacts/zips
+          for file in *.zip; do
+            if [ -f "$file" ]; then
+              sha256sum "$file" > "../checksums/${file}.sha256"
+              echo "✅ ${file}.sha256 created"
+            fi
+          done
+          cd ../..
+          cat artifacts/checksums/*.sha256
+
+      - name: Display artifacts summary
+        run: |
+          echo ""
+          echo "╔════════════════════════════════════════════════════════════╗"
+          echo "║            📦 ARTIFACTS READY FOR RELEASE                  ║"
+          echo "╚════════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "📁 ZIP Files:"
+          ls -lh artifacts/zips/ | grep -E "\.zip$" | awk '{printf "   ✓ %-50s %8s\n", $9, $5}'
+          echo ""
+          echo "📋 Total Size:"
+          du -sh artifacts/zips/
+          echo ""
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          cat > /tmp/release_notes.md << 'EOFNOTES'
+          # 🚀 Release v${{ steps.version.outputs.VERSION }}
+
+          This release contains three complete migration frameworks, each with comprehensive documentation and AI-powered agents.
+
+          ## 📦 Available Downloads
+
+          ### 1️⃣ Java-Backend
+          Backend infrastructure with agent definitions and development tools.
+          - [Download ZIP](./releases/download/v${{ steps.version.outputs.VERSION }}/Java-Backend-v${{ steps.version.outputs.VERSION }}.zip)
+          - **Contents:** Agents, instructions, prompts, skills, documentation
+          - **Size:** Check asset details
+
+          ### 2️⃣ Migrator-Csharp-to-Java  
+          Complete framework for migrating Azure Functions from C# to Java.
+          - [Download ZIP](./releases/download/v${{ steps.version.outputs.VERSION }}/Migrator-Csharp-to-Java-v${{ steps.version.outputs.VERSION }}.zip)
+          - **Contents:** C# analyzer, Java translator, migration guides, test patterns
+          - **Size:** Check asset details
+
+          ### 3️⃣ Migrator-Spring-to-Quarkus
+          Complete framework for migrating Spring Boot 2.x to Quarkus.
+          - [Download ZIP](./releases/download/v${{ steps.version.outputs.VERSION }}/Migrator-Spring-to-Quarkus-v${{ steps.version.outputs.VERSION }}.zip)
+          - **Contents:** Retrofit migration, Reactive stack transformation, OpenAPI integration, orchestration
+          - **Size:** Check asset details
+
+          ## 🚀 Quick Start
+
+          1. **Download** the ZIP file for your framework
+          2. **Extract** to your project directory
+          3. **Review** the included README files
+          4. **Follow** the step-by-step migration guides
+          5. **Use** the AI-powered agents with GitHub Copilot
+
+          ## 📋 Each ZIP Contains
+
+          ```
+          framework-directory/
+          ├── README / README_AGENT / README_MIGRATOR  (Complete guides)
+          ├── agent-orchestration.md                    (Automation workflow)
+          ├── .github/
+          │   ├── agents/                               (Agent definitions)
+          │   ├── instructions/                         (Migration steps)
+          │   ├── prompts/                              (Copilot prompts)
+          │   └── skills/                               (Executable procedures)
+          └── [Additional configuration and examples]
+          ```
+
+          ## ✨ Features
+
+          ✅ **AI-Powered Migration** - GitHub Copilot integration  
+          ✅ **Comprehensive Guides** - Step-by-step instructions  
+          ✅ **Automated Orchestration** - Manage entire migration flow  
+          ✅ **Validation Checklists** - Ensure quality at each step  
+          ✅ **Error Handling** - Rollback and recovery procedures  
+          ✅ **Code Examples** - Before/after transformations  
+
+          ## 🔐 File Integrity
+
+          SHA256 checksums are available for all ZIP files. Verify integrity:
+
+          ```bash
+          sha256sum -c *.zip.sha256
+          ```
+
+          ## 📖 Documentation References
+
+          - **Java-Backend:** Backend infrastructure and agent configuration
+          - **Migrator-Csharp-to-Java:** Azure Functions C# → Java migration
+          - **Migrator-Spring-to-Quarkus:** Spring Boot 2.x → Quarkus framework
+
+          ## 🔗 Support
+
+          - Review included documentation in each ZIP
+          - Check troubleshooting sections in migration guides
+          - Follow orchestration workflows for automated assistance
+
+          ---
+
+          **Release Date:** ${{ github.event.head_commit.timestamp || 'Auto-generated' }}  
+          **Commit SHA:** `${{ github.sha }}`  
+          **Branch:** `${{ github.ref_name }}`
+
+          EOFNOTES
+          cat /tmp/release_notes.md
+
+      - name: Create GitHub Release
+        if: steps.check_tag.outputs.TAG_EXISTS == 'false'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.VERSION }}
+          name: Release v${{ steps.version.outputs.VERSION }}
+          body_path: /tmp/release_notes.md
+          files: |
+            artifacts/zips/*.zip
+            artifacts/checksums/*.sha256
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update latest tag
+        if: steps.check_tag.outputs.TAG_EXISTS == 'false'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -f latest
+          git push -f origin latest
+          echo "✅ Latest tag updated to v${{ steps.version.outputs.VERSION }}"
+
+      - name: Final Summary
+        if: always()
+        run: |
+          echo ""
+          echo "╔════════════════════════════════════════════════════════════╗"
+          echo "║         ✅ RELEASE WORKFLOW COMPLETED SUCCESSFULLY         ║"
+          echo "╚════════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "📌 Release Information:"
+          echo "   Version: v${{ steps.version.outputs.VERSION }}"
+          echo "   Tag Exists: ${{ steps.check_tag.outputs.TAG_EXISTS }}"
+          echo "   Status: $([ '${{ steps.check_tag.outputs.TAG_EXISTS }}' = 'false' ] && echo '🎉 NEW RELEASE CREATED' || echo '⏭️  SKIPPED (tag exists)')"
+          echo ""
+          echo "📦 Artifacts Generated:"
+          ls -lh artifacts/zips/ 2>/dev/null | grep -E "\.zip$" | awk '{printf "   ✓ %s (%s)\n", $9, $5}' || echo "   (none)"
+          echo ""
+          echo "📋 Checksums Available:"
+          ls -lh artifacts/checksums/ 2>/dev/null | grep -E "\.sha256$" | awk '{printf "   ✓ %s\n", $9}' || echo "   (none)"
+          echo ""
+          echo "🔗 Download URL:"
+          echo "   https://github.com/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.VERSION }}"
+          echo ""
+          echo "═════════════════════════════════════════════════════════════"
