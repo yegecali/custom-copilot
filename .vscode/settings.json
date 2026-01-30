@@ -1,4 +1,49 @@
 {
+  "// Copilot Chat Configuration": "Configuration for GitHub Copilot Chat agents, prompts, skills and instructions",
+
+  "// === AGENTS CONFIGURATION ===": "Defines custom agents location",
+  "github.copilot.chat.agent.location": ".github/agents",
   "github.copilot.chat.agent.autoFix": true,
-  "editor.linkedEditing": true
+  "github.copilot.chat.agent.detectLocal": true,
+  "github.copilot.chat.agent.autoDiscovery": true,
+
+  "// === PROMPTS CONFIGURATION ===": "Defines custom prompts location",
+  "github.copilot.chat.prompt.location": ".github/prompts",
+  "github.copilot.chat.prompt.detectLocal": true,
+  "github.copilot.chat.prompt.autoDiscovery": true,
+
+  "// === SKILLS CONFIGURATION ===": "Defines custom skills location",
+  "github.copilot.chat.skill.location": ".github/skills",
+  "github.copilot.chat.skill.detectLocal": true,
+  "github.copilot.chat.skill.autoDiscovery": true,
+
+  "// === INSTRUCTIONS CONFIGURATION ===": "Defines custom instructions location",
+  "github.copilot.chat.instruction.location": ".github/instructions",
+  "github.copilot.chat.instruction.detectLocal": true,
+  "github.copilot.chat.instruction.autoDiscovery": true,
+
+  "// === FILE EXTENSIONS MAPPING ===": "Maps file extensions to agent/prompt/skill definitions",
+  "github.copilot.chat.fileMapping": {
+    "*.agent.md": "agent",
+    "*.prompt.md": "prompt",
+    "*.skill.md": "skill",
+    "*.instruction.md": "instruction"
+  },
+
+  "// === COPILOT GENERAL SETTINGS ===": "General Copilot configurations",
+  "editor.linkedEditing": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true
+  },
+  "github.copilot.chat.localeOverride": "es-ES",
+
+  "// === FILE EXCLUSIONS ===": "Exclude files from Copilot analysis",
+  "github.copilot.chat.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/.gradle": true
+  }
 }

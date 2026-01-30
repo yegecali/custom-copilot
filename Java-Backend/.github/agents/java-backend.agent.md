@@ -18,18 +18,18 @@ Tengo las siguientes **opciones disponibles** para ti:
 
 ### 📋 PROMPTS (Tareas Específicas)
 
-| #   | Prompt                               | Descripción                                 | Comando                              |
-| --- | ------------------------------------ | ------------------------------------------- | ------------------------------------ |
-| 1️⃣  | **analyze-design-patterns**          | Identificar patrones de diseño en tu código | `@java-backend analiza patrones`     |
-| 2️⃣  | **code-review-performance-security** | Revisión de performance y seguridad OWASP   | `@java-backend code review`          |
-| 3️⃣  | **conventional-commit-assistant**    | Generar commits con Jira ticket             | `@java-backend genera commit`        |
-| 4️⃣  | **detect-antipatterns**              | Detectar anti-patterns en código reactivo   | `@java-backend detecta antipatterns` |
-| 5️⃣  | **generate-openapi**                 | Generar especificación OpenAPI 3.1          | `@java-backend genera openapi`       |
-| 6️⃣  | **generate-sequence-diagram**        | Crear diagramas de secuencia Mermaid        | `@java-backend genera diagrama`      |
-| 7️⃣  | **jira-readme**                      | Documentar ticket Jira completo             | `@java-backend documenta jira`       |
-| 8️⃣  | **project-refactor**                 | Analizar deuda técnica y refactoring        | `@java-backend analiza deuda`        |
-| 9️⃣  | **fortify-checker-obs**              | Detección Fortify + CVSS scoring + remedios | `@java-backend fortify check`        |
-| 🔟  | **iriuskrisk-review**                | Assessment IriusRisk + OWASP mapping        | `@java-backend iriuskrisk check`     |
+| #    | Prompt                               | Descripción                                 | Comando                              |
+| ---- | ------------------------------------ | ------------------------------------------- | ------------------------------------ |
+| 1️⃣   | **analyze-design-patterns**          | Identificar patrones de diseño en tu código | `@java-backend analiza patrones`     |
+| 2️⃣   | **code-review-performance-security** | Revisión de performance y seguridad OWASP   | `@java-backend code review`          |
+| 3️⃣   | **conventional-commit-assistant**    | Generar commits con Jira ticket             | `@java-backend genera commit`        |
+| 4️⃣   | **detect-antipatterns**              | Detectar anti-patterns en código reactivo   | `@java-backend detecta antipatterns` |
+| 5️⃣   | **generate-openapi**                 | Generar especificación OpenAPI 3.1          | `@java-backend genera openapi`       |
+| 6️⃣   | **generate-sequence-diagram**        | Crear diagramas de secuencia Mermaid        | `@java-backend genera diagrama`      |
+| 7️⃣   | **jira-readme**                      | Documentar ticket Jira completo             | `@java-backend documenta jira`       |
+| 8️⃣   | **project-refactor**                 | Analizar deuda técnica y refactoring        | `@java-backend analiza deuda`        |
+| 9️⃣   | **fortify-checker-obs**              | Detección Fortify + CVSS scoring + remedios | `@java-backend fortify check`        |
+| 🔟   | **iriuskrisk-review**                | Assessment IriusRisk + OWASP mapping        | `@java-backend iriuskrisk check`     |
 | 1️⃣1️⃣ | **refactoring-loggers**              | Data obfuscation + PII detection            | `@java-backend refactor logs`        |
 | 1️⃣2️⃣ | **maven-dependencies-checker**       | Maven dependency analysis + versioning      | `@java-backend analiza deps`         |
 
@@ -37,11 +37,11 @@ Tengo las siguientes **opciones disponibles** para ti:
 
 ### 🎯 SKILLS (Capacidades Especializadas)
 
-| #   | Skill                  | Descripción                    | Cuándo usar                              |
-| --- | ---------------------- | ------------------------------ | ---------------------------------------- |
-| 🔍  | **java-code-review**   | Revisión senior de código Java | Cuando necesitas code review profesional |
-| 📊  | **pr-change-analyzer** | Analizar cambios en PR/commits | Cuando tienes cambios para revisar       |
-| ✅  | **checkstyle-review**  | Validación CheckStyle + conventions | Cuando necesitas validar code style    |
+| #   | Skill                  | Descripción                         | Cuándo usar                              |
+| --- | ---------------------- | ----------------------------------- | ---------------------------------------- |
+| 🔍  | **java-code-review**   | Revisión senior de código Java      | Cuando necesitas code review profesional |
+| 📊  | **pr-change-analyzer** | Analizar cambios en PR/commits      | Cuando tienes cambios para revisar       |
+| ✅  | **checkstyle-review**  | Validación CheckStyle + conventions | Cuando necesitas validar code style      |
 
 ---
 

@@ -1,6 +1,13 @@
 {
   "recommendations": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
     "ms-azuretools.vscode-azurefunctions",
-    "vscjava.vscode-java-debug"
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-maven",
+    "ms-vscode.extension-test-runner",
+    "redhat.java",
+    "visualstudioexptteam.vscodeintellicode",
+    "ms-vscode.makefile-tools"
   ]
 }
