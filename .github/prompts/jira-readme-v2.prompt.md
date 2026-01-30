@@ -20,13 +20,13 @@ Tu objetivo es **generar documentación completa para tickets Jira**.
 
 ## 🔧 TOOLS DISPONIBLES
 
-| Tool | Uso | Ejemplo |
-|------|-----|---------|
-| `semantic_search` | Buscar código relacionado | "card activation", "user service" |
-| `read_file` | Leer código existente | Entender implementación actual |
-| `grep_search` | Buscar funcionalidad existente | Encontrar métodos relacionados |
-| `file_search` | Encontrar archivos relevantes | "*Card*.java", "*Activation*.java" |
-| `create_file` | Crear README del ticket | Guardar documentación |
+| Tool              | Uso                            | Ejemplo                            |
+| ----------------- | ------------------------------ | ---------------------------------- |
+| `semantic_search` | Buscar código relacionado      | "card activation", "user service"  |
+| `read_file`       | Leer código existente          | Entender implementación actual     |
+| `grep_search`     | Buscar funcionalidad existente | Encontrar métodos relacionados     |
+| `file_search`     | Encontrar archivos relevantes  | "_Card_.java", "_Activation_.java" |
+| `create_file`     | Crear README del ticket        | Guardar documentación              |
 
 ### Estrategia:
 
@@ -121,15 +121,18 @@ Scenario: Activation blocked for lost/stolen card
 ## ✅ INCLUDED
 
 **Functional**:
+
 - Cardholder can activate card with SMS code
 - 24-hour expiration for codes
 - Block activation for LOST/STOLEN cards
 
 **APIs**:
+
 - POST /v1/cards/{cardId}/activate
 - GET /v1/cards/{cardId}/activation-status
 
 **Database**:
+
 - Card.activated_at timestamp
 - Activation_codes table
 
@@ -150,42 +153,44 @@ Scenario: Activation blocked for lost/stolen card
 
 ### 📜 Business Rules
 
-| # | Rule | Description | Enforcement |
-|---|------|-------------|-------------|
-| 1 | Code Validity | Codes valid for 24 hours | System |
-| 2 | Single-Use | Code cannot be reused after success | System |
-| 3 | Rate Limiting | Max 5 attempts per hour | System |
-| 4 | Status Check | LOST/STOLEN cards cannot activate | System |
-| 5 | Ownership | Only card owner can activate | System |
-| 6 | Audit Trail | All attempts logged for 7 years | System |
+| #   | Rule          | Description                         | Enforcement |
+| --- | ------------- | ----------------------------------- | ----------- |
+| 1   | Code Validity | Codes valid for 24 hours            | System      |
+| 2   | Single-Use    | Code cannot be reused after success | System      |
+| 3   | Rate Limiting | Max 5 attempts per hour             | System      |
+| 4   | Status Check  | LOST/STOLEN cards cannot activate   | System      |
+| 5   | Ownership     | Only card owner can activate        | System      |
+| 6   | Audit Trail   | All attempts logged for 7 years     | System      |
 
 ---
 
 ### ❓ Ambiguities Requiring Clarification
 
-| # | Question | Current Assumption | Owner |
-|---|----------|-------------------|-------|
-| 1 | What if SMS fails? | Retry 3 times automatically | PM |
-| 2 | Can admin force-activate? | No, must follow process | Security |
-| 3 | Code format/length? | 6 alphanumeric characters | Security |
-| 4 | International cards? | US only in phase 1 | Product |
-| 5 | Lockout duration? | 30 minutes after 5 failures | Fraud |
+| #   | Question                  | Current Assumption          | Owner    |
+| --- | ------------------------- | --------------------------- | -------- |
+| 1   | What if SMS fails?        | Retry 3 times automatically | PM       |
+| 2   | Can admin force-activate? | No, must follow process     | Security |
+| 3   | Code format/length?       | 6 alphanumeric characters   | Security |
+| 4   | International cards?      | US only in phase 1          | Product  |
+| 5   | Lockout duration?         | 30 minutes after 5 failures | Fraud    |
 
 ---
 
 ### 🛠️ Development Guidance
 
 **APIs to Create**:
+
 ```
 POST /v1/cards/{cardId}/activate
   Request: { activationCode: string }
   Response: { card: CardDto, activatedAt: DateTime }
-  
+
 GET /v1/cards/{cardId}/activation-status
   Response: { canActivate: boolean, reason?: string }
 ```
 
 **Database Changes**:
+
 ```sql
 ALTER TABLE cards ADD COLUMN activated_at TIMESTAMP;
 
@@ -200,6 +205,7 @@ CREATE TABLE activation_codes (
 ```
 
 **Tests Required**:
+
 - [ ] Happy path (successful activation)
 - [ ] Expired code rejection
 - [ ] LOST card blocking
@@ -223,7 +229,7 @@ CREATE TABLE activation_codes (
 
 ## COMPLETE OUTPUT EXAMPLE
 
-```markdown
+````markdown
 # 📋 Card Activation Feature - TEST-123
 
 ## 🎯 User Story
@@ -239,6 +245,7 @@ CREATE TABLE activation_codes (
 ### Happy Path
 
 **Scenario: Successful activation**
+
 ```gherkin
 Given a cardholder has received a credit card
 And they have a valid activation code from SMS
@@ -246,6 +253,7 @@ When they submit the activation request
 Then the card should become ACTIVE
 And they should receive confirmation SMS
 ```
+````
 
 ### Error Cases
 
@@ -272,6 +280,7 @@ And they should receive confirmation SMS
 ## 🛠️ Development Guidance
 
 [...]
+
 ```
 
 ---
@@ -290,3 +299,4 @@ And they should receive confirmation SMS
 - Omitir casos de error
 - Asumir sin documentar
 - Mezclar business rules con acceptance criteria
+```

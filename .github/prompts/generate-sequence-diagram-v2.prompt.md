@@ -22,15 +22,15 @@ Tu objetivo es **generar diagramas Mermaid** que visualicen flujos de ejecución
 
 ## 🔧 TOOLS DISPONIBLES
 
-| Tool | Uso | Ejemplo |
-|------|-----|---------|
-| `semantic_search` | Buscar flujos de ejecución | "service method flow" |
-| `read_file` | Leer código de servicios | Seguir flujo de llamadas |
-| `grep_search` | Buscar llamadas entre clases | "repository.find" |
-| `file_search` | Encontrar componentes | "*Service.java" |
-| `list_code_usages` | Ver llamadas a métodos | Trazar flujo |
-| `create_file` | Crear archivo .md con diagrama | Guardar Mermaid |
-| `open_simple_browser` | Previsualizar diagrama | Mermaid Live Editor |
+| Tool                  | Uso                            | Ejemplo                  |
+| --------------------- | ------------------------------ | ------------------------ |
+| `semantic_search`     | Buscar flujos de ejecución     | "service method flow"    |
+| `read_file`           | Leer código de servicios       | Seguir flujo de llamadas |
+| `grep_search`         | Buscar llamadas entre clases   | "repository.find"        |
+| `file_search`         | Encontrar componentes          | "\*Service.java"         |
+| `list_code_usages`    | Ver llamadas a métodos         | Trazar flujo             |
+| `create_file`         | Crear archivo .md con diagrama | Guardar Mermaid          |
+| `open_simple_browser` | Previsualizar diagrama         | Mermaid Live Editor      |
 
 ### Patrones a Buscar:
 
@@ -111,40 +111,40 @@ Define:
 ```mermaid
 sequenceDiagram
     autonumber
-    
+
     participant User
     participant Controller as CardController
     participant Service as CardService
     participant Repository as CardRepository
     participant DB as Database
     participant SMS as SMS Provider
-    
+
     %% === FLUJO PRINCIPAL: Activación de Tarjeta ===
-    
+
     User->>+Controller: POST /api/cards/{id}/activate
     Note right of User: Payload: {activationCode: "ABC123"}
-    
+
     Controller->>Controller: validateRequest(request)
-    
+
     Controller->>+Service: activateCard(cardId, code, userId)
-    
+
     %% Buscar tarjeta
     Service->>+Repository: findById(cardId)
     Repository->>+DB: SELECT * FROM cards WHERE id = ?
     DB-->>-Repository: Card{id, status=ISSUED}
     Repository-->>-Service: Optional<Card>
-    
+
     %% Validar estado
     alt Card not found
         Service-->>Controller: throw CardNotFoundException
         Controller-->>User: 404 Not Found
     else Card found
         Note over Service: Validar estado y ownership
-        
+
         Service->>Service: validateOwnership(card, userId)
         Service->>Service: validateStatus(card)
         Service->>Service: validateActivationCode(card, code)
-        
+
         alt Validation failed
             Service-->>Controller: throw ValidationException
             Controller-->>User: 400 Bad Request
@@ -154,11 +154,11 @@ sequenceDiagram
             Repository->>+DB: UPDATE cards SET status = 'ACTIVE'
             DB-->>-Repository: ✓ Updated
             Repository-->>-Service: Card{status=ACTIVE}
-            
+
             %% Enviar notificación
             Service->>+SMS: sendActivationConfirmation(phone)
             SMS-->>-Service: ✓ Sent
-            
+
             Service-->>-Controller: ActivationResult{success=true}
             Controller-->>-User: 200 OK {card}
         end
@@ -267,9 +267,11 @@ sequenceDiagram
 # 📊 Sequence Diagram: Card Activation Flow
 
 ## Descripción
+
 Este diagrama muestra el flujo de activación de tarjeta bancaria.
 
 ## Participantes
+
 - **User**: Cliente de la API
 - **CardController**: REST controller
 - **CardService**: Business logic
@@ -282,6 +284,7 @@ Este diagrama muestra el flujo de activación de tarjeta bancaria.
 [código mermaid aquí]
 
 ## Notas
+
 - Todas las operaciones son transaccionales
 - El SMS es asíncrono (no bloquea respuesta)
 - Tiempo esperado: < 500ms
@@ -292,6 +295,7 @@ Este diagrama muestra el flujo de activación de tarjeta bancaria.
 ## RESTRICCIONES
 
 ✅ **Hacer**:
+
 - Usar tools para explorar el código real
 - Incluir manejo de errores (alt/else)
 - Usar autonumber para numeración
@@ -299,6 +303,7 @@ Este diagrama muestra el flujo de activación de tarjeta bancaria.
 - Simplificar si hay muchos pasos
 
 ❌ **NO hacer**:
+
 - Inventar flujos no existentes
 - Crear diagramas demasiado complejos
 - Omitir casos de error importantes

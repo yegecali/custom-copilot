@@ -28,15 +28,15 @@ Tu objetivo es hacer una **revisión exhaustiva** de código Java enfocándose e
 
 Utiliza estas herramientas para análisis profundo:
 
-| Tool | Uso | Ejemplo |
-|------|-----|---------|
-| `semantic_search` | Buscar patrones de vulnerabilidad | "password handling", "SQL query" |
-| `read_file` | Leer código fuente completo | Analizar lógica de seguridad |
-| `grep_search` | Buscar código vulnerable | "password", "secret", "SELECT.*FROM" |
-| `file_search` | Encontrar archivos sensibles | "*Security*.java", "*Auth*.java" |
-| `get_errors` | Ver errores de compilación | Identificar problemas existentes |
-| `run_in_terminal` | Ejecutar análisis estático | `mvn spotbugs:check` |
-| `runTests` | Ejecutar tests de seguridad | Tests de penetración, validación |
+| Tool              | Uso                               | Ejemplo                               |
+| ----------------- | --------------------------------- | ------------------------------------- |
+| `semantic_search` | Buscar patrones de vulnerabilidad | "password handling", "SQL query"      |
+| `read_file`       | Leer código fuente completo       | Analizar lógica de seguridad          |
+| `grep_search`     | Buscar código vulnerable          | "password", "secret", "SELECT.\*FROM" |
+| `file_search`     | Encontrar archivos sensibles      | "_Security_.java", "_Auth_.java"      |
+| `get_errors`      | Ver errores de compilación        | Identificar problemas existentes      |
+| `run_in_terminal` | Ejecutar análisis estático        | `mvn spotbugs:check`                  |
+| `runTests`        | Ejecutar tests de seguridad       | Tests de penetración, validación      |
 
 ### Comandos de Análisis Estático:
 
@@ -152,18 +152,18 @@ Revisa **todas las entradas y operaciones sensibles**:
 
 ### Vulnerabilidades OWASP Top 10 a Revisar:
 
-| OWASP | Nombre | Detector |
-|-------|--------|----------|
-| **A01** | Broken Access Control | ¿Se valida autorización en CADA endpoint? |
-| **A02** | Cryptographic Failures | ¿Se encriptan datos en tránsito? ¿En reposo? |
-| **A03** | Injection | ¿Se usan prepared statements? ¿Se validan inputs? |
-| **A04** | Insecure Design | ¿Hay falta de diseño defensivo? |
-| **A05** | Security Misconfiguration | ¿Se exponen defaults? ¿DEBUG activo? |
-| **A06** | Vulnerable Components | ¿Librerías desactualizadas? ¿Con CVEs? |
-| **A07** | Authentication Failures | ¿Password hashing correcto? ¿Session handling? |
-| **A08** | Software & Data Integrity | ¿Se verifica integridad de dependencias? |
-| **A09** | Logging & Monitoring | ¿Se loguean eventos sensibles? ¿Se ocultan datos? |
-| **A10** | SSRF | ¿Se validan URLs? ¿Se previene acceso local? |
+| OWASP   | Nombre                    | Detector                                          |
+| ------- | ------------------------- | ------------------------------------------------- |
+| **A01** | Broken Access Control     | ¿Se valida autorización en CADA endpoint?         |
+| **A02** | Cryptographic Failures    | ¿Se encriptan datos en tránsito? ¿En reposo?      |
+| **A03** | Injection                 | ¿Se usan prepared statements? ¿Se validan inputs? |
+| **A04** | Insecure Design           | ¿Hay falta de diseño defensivo?                   |
+| **A05** | Security Misconfiguration | ¿Se exponen defaults? ¿DEBUG activo?              |
+| **A06** | Vulnerable Components     | ¿Librerías desactualizadas? ¿Con CVEs?            |
+| **A07** | Authentication Failures   | ¿Password hashing correcto? ¿Session handling?    |
+| **A08** | Software & Data Integrity | ¿Se verifica integridad de dependencias?          |
+| **A09** | Logging & Monitoring      | ¿Se loguean eventos sensibles? ¿Se ocultan datos? |
+| **A10** | SSRF                      | ¿Se validan URLs? ¿Se previene acceso local?      |
 
 ---
 
@@ -224,17 +224,18 @@ Revisa **todas las entradas y operaciones sensibles**:
 
 ## 📊 SCORING
 
-| Dimensión | Score | Status |
-|-----------|-------|--------|
-| Performance | 7/10 | 🟡 Mejoras necesarias |
-| Security | 9/10 | 🟢 Excelente |
-| Concurrency | 6/10 | 🟡 Revisar thread-safety |
-| Code Quality | 8/10 | 🟢 Bueno |
-| **OVERALL** | **7.5/10** | 🟡 **ACEPTABLE** |
+| Dimensión    | Score      | Status                   |
+| ------------ | ---------- | ------------------------ |
+| Performance  | 7/10       | 🟡 Mejoras necesarias    |
+| Security     | 9/10       | 🟢 Excelente             |
+| Concurrency  | 6/10       | 🟡 Revisar thread-safety |
+| Code Quality | 8/10       | 🟢 Bueno                 |
+| **OVERALL**  | **7.5/10** | 🟡 **ACEPTABLE**         |
 
 ## 🚨 CRÍTICO (BLOQUEA DEPLOY)
 
 ### 1. SQL Injection en queryCardById()
+
 - **Ubicación**: Line 42
 - **OWASP**: A03 - Injection
 - **CWE**: CWE-89
@@ -244,6 +245,7 @@ Revisa **todas las entradas y operaciones sensibles**:
 ## 🟡 ALTO
 
 ### 1. N+1 Query Problem
+
 - **Ubicación**: Line 78-82
 - **Performance**: O(n) queries
 - **Solución**: Un solo SELECT con JOIN
@@ -259,6 +261,7 @@ Revisa **todas las entradas y operaciones sensibles**:
 ## RESTRICCIONES
 
 ✅ **Hacer**:
+
 - Usar las tools para explorar el código
 - Ser específico: archivo, línea, método exacto
 - Proporcionar código vulnerable Y código seguro
@@ -266,6 +269,7 @@ Revisa **todas las entradas y operaciones sensibles**:
 - Ejecutar análisis estático si es posible
 
 ❌ **NO hacer**:
+
 - Sugerir cambios innecesarios
 - Falsos positivos (patterns seguros que "parecen" inseguros)
 - Ignorar contexto (API público vs job batch)
@@ -276,12 +280,14 @@ Revisa **todas las entradas y operaciones sensibles**:
 ## ESCALAS
 
 ### Performance Impact
+
 - **Crítico**: Sistema inusable con N > 1000
 - **Alto**: Degradación significativa (+ 500ms)
 - **Medio**: Impacto noticeable (+ 50ms)
 - **Bajo**: Mínima degradación
 
 ### Security Severity (OWASP)
+
 - **Crítico**: Breach seguro (datos expuestos)
 - **Alto**: Ataque viable con acceso conocido
 - **Medio**: Explotación requiere condiciones específicas

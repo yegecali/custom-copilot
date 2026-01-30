@@ -24,15 +24,15 @@ Tu objetivo es **generar especificación OpenAPI 3.1** completa a partir del có
 
 Utiliza estas herramientas para generar OpenAPI:
 
-| Tool | Uso | Ejemplo |
-|------|-----|---------|
-| `semantic_search` | Buscar controllers y DTOs | "REST controller", "request body" |
-| `read_file` | Leer código de controllers | Extraer endpoints, parámetros |
-| `grep_search` | Buscar anotaciones REST | "@GetMapping", "@PostMapping" |
-| `file_search` | Encontrar controllers/DTOs | "*Controller.java", "*Dto.java" |
-| `list_code_usages` | Ver usos de DTOs | Entender relaciones entre modelos |
-| `create_file` | Crear archivo OpenAPI | Generar openapi.yaml |
-| `run_in_terminal` | Validar OpenAPI generado | `npx @redocly/cli lint` |
+| Tool               | Uso                        | Ejemplo                           |
+| ------------------ | -------------------------- | --------------------------------- |
+| `semantic_search`  | Buscar controllers y DTOs  | "REST controller", "request body" |
+| `read_file`        | Leer código de controllers | Extraer endpoints, parámetros     |
+| `grep_search`      | Buscar anotaciones REST    | "@GetMapping", "@PostMapping"     |
+| `file_search`      | Encontrar controllers/DTOs | "*Controller.java", "*Dto.java"   |
+| `list_code_usages` | Ver usos de DTOs           | Entender relaciones entre modelos |
+| `create_file`      | Crear archivo OpenAPI      | Generar openapi.yaml              |
+| `run_in_terminal`  | Validar OpenAPI generado   | `npx @redocly/cli lint`           |
 
 ### Anotaciones a Buscar:
 
@@ -143,7 +143,7 @@ info:
   version: 1.0.0
   description: |
     API for managing bank cards.
-    
+
     ## Authentication
     All endpoints require Bearer token authentication.
   contact:
@@ -189,7 +189,7 @@ paths:
             type: integer
             default: 20
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
@@ -199,15 +199,15 @@ paths:
                   content:
                     type: array
                     items:
-                      $ref: '#/components/schemas/CardDto'
+                      $ref: "#/components/schemas/CardDto"
                   totalElements:
                     type: integer
                   totalPages:
                     type: integer
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
     post:
       summary: Create a new card
@@ -219,21 +219,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCardRequest'
+              $ref: "#/components/schemas/CreateCardRequest"
             example:
               cardHolderName: "John Doe"
               cardType: "VISA"
       responses:
-        '201':
+        "201":
           description: Card created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CardDto'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+                $ref: "#/components/schemas/CardDto"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
 
   /cards/{cardId}:
     get:
@@ -250,14 +250,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: Card found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CardDto'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/CardDto"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
 components:
   securitySchemes:
@@ -332,25 +332,25 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorResponse"
     Unauthorized:
       description: Unauthorized
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorResponse"
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorResponse"
     InternalError:
       description: Internal server error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: "#/components/schemas/ErrorResponse"
 ```
 
 ---
@@ -358,6 +358,7 @@ components:
 ## RESTRICCIONES
 
 ✅ **Hacer**:
+
 - Usar tools para explorar el código
 - Documentar TODOS los endpoints encontrados
 - Incluir ejemplos realistas
@@ -365,6 +366,7 @@ components:
 - Usar refs para schemas reutilizables
 
 ❌ **NO hacer**:
+
 - Inventar endpoints no existentes
 - Omitir status codes de error
 - Usar tipos genéricos (object) sin definir

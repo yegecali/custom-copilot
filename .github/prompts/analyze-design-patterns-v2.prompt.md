@@ -27,14 +27,14 @@ Tu objetivo es **analizar código Java e identificar patrones de diseño**:
 
 Utiliza estas herramientas para análisis profundo:
 
-| Tool | Uso | Ejemplo |
-|------|-----|---------|
-| `semantic_search` | Buscar patrones por concepto | "factory pattern implementation" |
-| `read_file` | Leer código fuente completo | Analizar implementación específica |
-| `grep_search` | Buscar keywords de patrones | "getInstance", "Builder", "@Singleton" |
-| `file_search` | Encontrar archivos por nombre | "*Factory.java", "*Repository.java" |
-| `list_dir` | Explorar estructura del proyecto | Entender organización de paquetes |
-| `list_code_usages` | Ver usos de clases/métodos | Encontrar dónde se usa un Factory |
+| Tool               | Uso                              | Ejemplo                                |
+| ------------------ | -------------------------------- | -------------------------------------- |
+| `semantic_search`  | Buscar patrones por concepto     | "factory pattern implementation"       |
+| `read_file`        | Leer código fuente completo      | Analizar implementación específica     |
+| `grep_search`      | Buscar keywords de patrones      | "getInstance", "Builder", "@Singleton" |
+| `file_search`      | Encontrar archivos por nombre    | "*Factory.java", "*Repository.java"    |
+| `list_dir`         | Explorar estructura del proyecto | Entender organización de paquetes      |
+| `list_code_usages` | Ver usos de clases/métodos       | Encontrar dónde se usa un Factory      |
 
 ### Estrategia de Análisis:
 
@@ -130,21 +130,22 @@ Sugiere patrones que MEJORARÍAN el código actual:
 
 Para cada patrón significativo, documenta:
 
-| Patrón | Ventajas | Desventajas | Contexto Ideal |
-|--------|----------|-------------|----------------|
-| **Singleton** | Simple, global | Testing difícil | Recursos únicos |
-| **Factory** | Flexibilidad | Indirección | Creación compleja |
-| **Repository** | Abstracción BD | Sobre-abstracción | Multi-BD |
-| **Observer** | Desacoplamiento | Difícil de debuggear | Eventos |
-| **Decorator** | Composición | Cadenas largas | Comportamientos combinables |
-| **Strategy** | Polimorfismo | Clases auxiliares | Algoritmos intercambiables |
-| **Builder** | Readabilidad | Métodos extra | Constructores complejos |
+| Patrón         | Ventajas        | Desventajas          | Contexto Ideal              |
+| -------------- | --------------- | -------------------- | --------------------------- |
+| **Singleton**  | Simple, global  | Testing difícil      | Recursos únicos             |
+| **Factory**    | Flexibilidad    | Indirección          | Creación compleja           |
+| **Repository** | Abstracción BD  | Sobre-abstracción    | Multi-BD                    |
+| **Observer**   | Desacoplamiento | Difícil de debuggear | Eventos                     |
+| **Decorator**  | Composición     | Cadenas largas       | Comportamientos combinables |
+| **Strategy**   | Polimorfismo    | Clases auxiliares    | Algoritmos intercambiables  |
+| **Builder**    | Readabilidad    | Métodos extra        | Constructores complejos     |
 
 ---
 
 ## PATRONES A RECONOCER
 
 ### 🟢 Creacionales
+
 - Singleton / Double-checked Locking
 - Factory / Abstract Factory
 - Builder
@@ -152,6 +153,7 @@ Para cada patrón significativo, documenta:
 - Object Pool
 
 ### 🟡 Estructurales
+
 - Adapter
 - Bridge
 - Composite
@@ -161,6 +163,7 @@ Para cada patrón significativo, documenta:
 - Flyweight
 
 ### 🔵 Comportamentales
+
 - Chain of Responsibility
 - Command
 - Interpreter
@@ -174,6 +177,7 @@ Para cada patrón significativo, documenta:
 - Visitor
 
 ### 🟣 Empresariales
+
 - Data Transfer Object (DTO)
 - Repository
 - Service Locator
@@ -181,6 +185,7 @@ Para cada patrón significativo, documenta:
 - MVC / MVP / MVVM
 
 ### 🟠 Reactivos (Java 9+)
+
 - Reactive Streams
 - Project Reactor (Mono/Flux)
 - RxJava (Observable)
@@ -195,18 +200,19 @@ Para cada patrón significativo, documenta:
 
 ## 📊 Resumen Ejecutivo
 
-| Métrica | Valor |
-|---------|-------|
-| Patrones Presentes | N |
-| Patrones Bien Aplicados | N |
-| Patrones Cuestionables | N |
-| Patrones Recomendados | N |
-| Complejidad General | Baja/Media/Alta |
-| Mantenibilidad | N/10 |
+| Métrica                 | Valor           |
+| ----------------------- | --------------- |
+| Patrones Presentes      | N               |
+| Patrones Bien Aplicados | N               |
+| Patrones Cuestionables  | N               |
+| Patrones Recomendados   | N               |
+| Complejidad General     | Baja/Media/Alta |
+| Mantenibilidad          | N/10            |
 
 ## ✅ Patrones Presentes
 
 ### 1. Factory Pattern (Efectividad: 8/10)
+
 - **Ubicación**: UserFactory.java:15-42
 - **Justificación**: Centraliza creación de Users
 - **Mejora**: Agregar try-catch
@@ -214,6 +220,7 @@ Para cada patrón significativo, documenta:
 ## ⚠️ Potencial Overengineering
 
 ### 1. Strategy Pattern (Excesivo)
+
 - **Ubicación**: PaymentStrategy.java
 - **Problema**: Solo hay 2 formas de pago
 - **Recomendación**: Simplificar a enum
@@ -221,6 +228,7 @@ Para cada patrón significativo, documenta:
 ## 🎯 Patrones Recomendados
 
 ### 1. Decorator Pattern (Prioridad: Media)
+
 - **Ubicación**: DatabaseConnection
 - **Beneficio**: Agregar logging, retry
 - **Costo**: 2-3 horas
@@ -231,6 +239,7 @@ Para cada patrón significativo, documenta:
 ## RESTRICCIONES
 
 ✅ **Hacer**:
+
 - Ser específico con ubicaciones (archivo:línea)
 - Incluir ejemplos de código
 - Justificar TODAS las recomendaciones
@@ -238,6 +247,7 @@ Para cada patrón significativo, documenta:
 - Usar las tools para explorar el código
 
 ❌ **NO hacer**:
+
 - Sugerir patrones sin justificación
 - Recomendar refactoring innecesario
 - Ignorar el contexto o tamaño del proyecto

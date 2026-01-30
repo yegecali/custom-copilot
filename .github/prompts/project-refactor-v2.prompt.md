@@ -23,16 +23,16 @@ Tu objetivo es **detectar y cuantificar deuda técnica** para priorizar refactor
 
 ## 🔧 TOOLS DISPONIBLES
 
-| Tool | Uso | Ejemplo |
-|------|-----|---------|
-| `semantic_search` | Buscar code smells | "god class", "long method" |
-| `read_file` | Leer código problemático | Analizar complejidad |
-| `grep_search` | Buscar anti-patterns | "Manager", "Handler", "Util" |
-| `file_search` | Encontrar clases grandes | Ver estructura del proyecto |
-| `list_code_usages` | Ver acoplamiento | Cuántas clases dependen de otra |
-| `run_in_terminal` | Ejecutar análisis estático | PMD, SpotBugs |
-| `get_errors` | Ver errores existentes | Problemas de compilación |
-| `runTests` | Ejecutar tests | Validar cobertura actual |
+| Tool               | Uso                        | Ejemplo                         |
+| ------------------ | -------------------------- | ------------------------------- |
+| `semantic_search`  | Buscar code smells         | "god class", "long method"      |
+| `read_file`        | Leer código problemático   | Analizar complejidad            |
+| `grep_search`      | Buscar anti-patterns       | "Manager", "Handler", "Util"    |
+| `file_search`      | Encontrar clases grandes   | Ver estructura del proyecto     |
+| `list_code_usages` | Ver acoplamiento           | Cuántas clases dependen de otra |
+| `run_in_terminal`  | Ejecutar análisis estático | PMD, SpotBugs                   |
+| `get_errors`       | Ver errores existentes     | Problemas de compilación        |
+| `runTests`         | Ejecutar tests             | Validar cobertura actual        |
 
 ### Comandos de Análisis:
 
@@ -100,35 +100,35 @@ grep_search: "public static.*\("
 
 Mide:
 
-| Métrica | Umbral Amarillo | Umbral Rojo | Acción |
-|---------|-----------------|-------------|--------|
-| Complejidad Ciclomática | > 7 | > 10 | Extraer métodos |
-| Líneas por Método | > 20 | > 30 | Split método |
-| Líneas por Clase | > 200 | > 300 | Split clase |
-| Parámetros por Método | > 3 | > 5 | Usar objeto |
-| Código Duplicado | > 3 bloques | > 5 bloques | Extraer común |
+| Métrica                 | Umbral Amarillo | Umbral Rojo | Acción          |
+| ----------------------- | --------------- | ----------- | --------------- |
+| Complejidad Ciclomática | > 7             | > 10        | Extraer métodos |
+| Líneas por Método       | > 20            | > 30        | Split método    |
+| Líneas por Clase        | > 200           | > 300       | Split clase     |
+| Parámetros por Método   | > 3             | > 5         | Usar objeto     |
+| Código Duplicado        | > 3 bloques     | > 5 bloques | Extraer común   |
 
 ### 2️⃣ Violaciones SOLID
 
-| Principio | Síntoma | Detección |
-|-----------|---------|-----------|
-| **S**RP | Clase hace muchas cosas | Múltiples imports de dominios diferentes |
-| **O**CP | Muchos if/else para tipos | `if (type == A) else if (type == B)` |
-| **L**SP | Herencia rota | Métodos que lanzan UnsupportedOperationException |
-| **I**SP | Interfaces gordas | Clases implementan interfaces con métodos vacíos |
-| **D**IP | Acoplamiento a concretos | `new ConcreteClass()` en lugar de DI |
+| Principio | Síntoma                   | Detección                                        |
+| --------- | ------------------------- | ------------------------------------------------ |
+| **S**RP   | Clase hace muchas cosas   | Múltiples imports de dominios diferentes         |
+| **O**CP   | Muchos if/else para tipos | `if (type == A) else if (type == B)`             |
+| **L**SP   | Herencia rota             | Métodos que lanzan UnsupportedOperationException |
+| **I**SP   | Interfaces gordas         | Clases implementan interfaces con métodos vacíos |
+| **D**IP   | Acoplamiento a concretos  | `new ConcreteClass()` en lugar de DI             |
 
 ### 3️⃣ Code Smells
 
-| Smell | Indicador | Solución |
-|-------|-----------|----------|
-| God Object | > 500 LOC, muchos métodos | Split por responsabilidad |
-| Feature Envy | Método usa más otra clase | Mover a la otra clase |
-| Long Parameter | > 5 parámetros | Parameter Object |
-| Primitive Obsession | String email, String phone | Value Objects |
-| Data Clumps | Mismos params en varios métodos | Agrupar en clase |
-| Message Chains | a.getB().getC().getD() | Law of Demeter |
-| Dead Code | Métodos no usados | Eliminar |
+| Smell               | Indicador                       | Solución                  |
+| ------------------- | ------------------------------- | ------------------------- |
+| God Object          | > 500 LOC, muchos métodos       | Split por responsabilidad |
+| Feature Envy        | Método usa más otra clase       | Mover a la otra clase     |
+| Long Parameter      | > 5 parámetros                  | Parameter Object          |
+| Primitive Obsession | String email, String phone      | Value Objects             |
+| Data Clumps         | Mismos params en varios métodos | Agrupar en clase          |
+| Message Chains      | a.getB().getC().getD()          | Law of Demeter            |
+| Dead Code           | Métodos no usados               | Eliminar                  |
 
 ---
 
@@ -136,13 +136,13 @@ Mide:
 
 ### 📊 Resumen de Deuda Técnica
 
-| Categoría | Crítico | Mayor | Menor | Horas Est. |
-|-----------|---------|-------|-------|------------|
-| Clases Grandes | 2 | 3 | 5 | 40h |
-| Métodos Largos | 5 | 10 | 20 | 30h |
-| Código Duplicado | 1 | 4 | 8 | 15h |
-| SOLID Violations | 3 | 5 | 10 | 25h |
-| **TOTAL** | **11** | **22** | **43** | **110h** |
+| Categoría        | Crítico | Mayor  | Menor  | Horas Est. |
+| ---------------- | ------- | ------ | ------ | ---------- |
+| Clases Grandes   | 2       | 3      | 5      | 40h        |
+| Métodos Largos   | 5       | 10     | 20     | 30h        |
+| Código Duplicado | 1       | 4      | 8      | 15h        |
+| SOLID Violations | 3       | 5      | 10     | 25h        |
+| **TOTAL**        | **11**  | **22** | **43** | **110h**   |
 
 ### 🔴 Issues Críticos
 
@@ -156,13 +156,15 @@ Mide:
   - Email notifications (líneas 251-320)
   - Reporting (líneas 321-450)
 - **Solución**:
+
 ```
-OrderProcessor → 
+OrderProcessor →
   ├── OrderValidator
   ├── OrderRepository
   ├── OrderNotificationService
   └── OrderReportGenerator
 ```
+
 - **Esfuerzo**: 16 horas
 - **Prioridad**: 🔴 Alta (afecta testabilidad)
 
@@ -194,24 +196,27 @@ OrderProcessor →
 
 ### Matriz de Prioridad
 
-| Issue | Impacto | Esfuerzo | ROI | Orden |
-|-------|---------|----------|-----|-------|
-| OrderProcessor split | Alto | 16h | ⭐⭐⭐ | 1 |
-| processPayment() | Alto | 4h | ⭐⭐⭐⭐ | 2 |
-| Código duplicado | Medio | 2h | ⭐⭐⭐⭐⭐ | 3 |
+| Issue                | Impacto | Esfuerzo | ROI        | Orden |
+| -------------------- | ------- | -------- | ---------- | ----- |
+| OrderProcessor split | Alto    | 16h      | ⭐⭐⭐     | 1     |
+| processPayment()     | Alto    | 4h       | ⭐⭐⭐⭐   | 2     |
+| Código duplicado     | Medio   | 2h       | ⭐⭐⭐⭐⭐ | 3     |
 
 ### Roadmap Sugerido
 
 **Sprint 1 (40h)**:
+
 - [ ] Split OrderProcessor
 - [ ] Refactor processPayment()
 - [ ] Eliminar código duplicado
 
 **Sprint 2 (40h)**:
+
 - [ ] SOLID violations
 - [ ] Long parameter lists
 
 **Backlog**:
+
 - [ ] Minor code smells
 - [ ] Documentation
 
@@ -220,6 +225,7 @@ OrderProcessor →
 ## RESTRICCIONES
 
 ✅ **Hacer**:
+
 - Usar tools para explorar el código
 - Ser específico con ubicaciones
 - Cuantificar deuda en horas
@@ -227,6 +233,7 @@ OrderProcessor →
 - Priorizar por ROI (impacto / esfuerzo)
 
 ❌ **NO hacer**:
+
 - Inventar problemas
 - Exagerar severidad
 - Ignorar contexto del proyecto
