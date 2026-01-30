@@ -1,260 +1,266 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
-  "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-  <!-- Suppression filters -->
-  <module name="SuppressionFilter">
-    <property name="file" value="${org.checkstyle.sun.suppress.filters.file}" default="suppressions.xml"/>
-  </module>
-
-  <!-- File level properties -->
-  <property name="fileExtensions" value="java"/>
-
-  <!-- ========== Checker Modules (File-level checks) ========== -->
-
-  <!-- File length: No Java file should exceed 2000 lines -->
-  <module name="FileLength">
-    <property name="max" value="2000"/>
-    <property name="fileExtensions" value="java"/>
-  </module>
-
-  <!-- Line length: Maximum 120 characters per line -->
-  <module name="LineLength">
-    <property name="max" value="120"/>
-    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://"/>
-    <property name="fileExtensions" value="java"/>
-  </module>
-
-  <!-- New line at end of file -->
-  <module name="NewlineAtEndOfFile">
-    <property name="lineSeparator" value="lf"/>
-  </module>
-
-  <!-- ========== TreeWalker Modules (Detailed checks) ========== -->
-  <module name="TreeWalker">
-
-    <!-- ===== Javadoc Comments ===== -->
-    <!-- Require Javadoc for public methods and classes -->
-    <module name="JavadocMethod">
-      <property name="scope" value="public"/>
-      <property name="allowMissingParamTags" value="false"/>
-      <property name="allowMissingReturnTag" value="false"/>
-      <property name="allowedAnnotations" value="Override"/>
+    <!-- Suppression filters -->
+    <module name="SuppressionFilter">
+        <property name="file" value="${org.checkstyle.sun.suppress.filters.file}"
+            default="suppressions.xml" />
     </module>
 
-    <module name="JavadocType">
-      <property name="scope" value="public"/>
-      <property name="authorFormat" value="\S"/>
+    <!-- File level properties -->
+    <property name="fileExtensions" value="java" />
+
+    <!-- ========== Checker Modules (File-level checks) ========== -->
+
+    <!-- File length: No Java file should exceed 2000 lines -->
+    <module name="FileLength">
+        <property name="max" value="2000" />
+        <property name="fileExtensions" value="java" />
     </module>
 
-    <!-- Check for invalid Javadoc -->
-    <module name="JavadocStyle">
-      <property name="checkFirstSentence" value="false"/>
+    <!-- Line length: Maximum 120 characters per line -->
+    <module name="LineLength">
+        <property name="max" value="120" />
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://" />
+        <property name="fileExtensions" value="java" />
     </module>
 
-    <!-- ===== Naming Conventions ===== -->
-    <!-- Class names must start with uppercase letter -->
-    <module name="TypeName">
-      <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
-      <message key="name.invalidPattern" value="Type name ''{0}'' must match pattern ''{1}''."/>
+    <!-- New line at end of file -->
+    <module name="NewlineAtEndOfFile">
+        <property name="lineSeparator" value="lf" />
     </module>
 
-    <!-- Method names must start with lowercase letter -->
-    <module name="MethodName">
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-      <property name="allowClassName" value="false"/>
-      <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>
+    <!-- ========== TreeWalker Modules (Detailed checks) ========== -->
+    <module name="TreeWalker">
+
+        <!-- ===== Javadoc Comments ===== -->
+        <!-- Require Javadoc for public methods and classes -->
+        <module name="JavadocMethod">
+            <property name="scope" value="public" />
+            <property name="allowMissingParamTags" value="false" />
+            <property name="allowMissingReturnTag" value="false" />
+            <property name="allowedAnnotations" value="Override" />
+        </module>
+
+        <module name="JavadocType">
+            <property name="scope" value="public" />
+            <property name="authorFormat" value="\S" />
+        </module>
+
+        <!-- Check for invalid Javadoc -->
+        <module name="JavadocStyle">
+            <property name="checkFirstSentence" value="false" />
+        </module>
+
+        <!-- ===== Naming Conventions ===== -->
+        <!-- Class names must start with uppercase letter -->
+        <module name="TypeName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$" />
+            <message key="name.invalidPattern" value="Type name ''{0}'' must match pattern ''{1}''." />
+        </module>
+
+        <!-- Method names must start with lowercase letter -->
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$" />
+            <property name="allowClassName" value="false" />
+            <message key="name.invalidPattern"
+                value="Method name ''{0}'' must match pattern ''{1}''." />
+        </module>
+
+        <!-- Constant names must be UPPER_CASE -->
+        <module name="ConstantName">
+            <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$" />
+            <message key="name.invalidPattern"
+                value="Constant name ''{0}'' must match pattern ''{1}''." />
+        </module>
+
+        <!-- Local variable names -->
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z]([a-zA-Z0-9]*)?$" />
+            <property name="allowOneCharVarInForLoop" value="true" />
+        </module>
+
+        <!-- Parameter names -->
+        <module name="ParameterName">
+            <property name="format" value="^[a-z]([a-zA-Z0-9]*)?$" />
+        </module>
+
+        <!-- Member variable names -->
+        <module name="MemberName">
+            <property name="format" value="^[a-z]([a-zA-Z0-9]*)?$" />
+        </module>
+
+        <!-- ===== Imports ===== -->
+        <!-- Avoid wildcard imports -->
+        <module name="AvoidStarImport">
+            <property name="excludes"
+                value="java.io,java.util,java.util.stream,java.util.concurrent" />
+            <property name="allowClassImports" value="false" />
+            <property name="allowStaticImports" value="false" />
+        </module>
+
+        <!-- Detect unused imports -->
+        <module name="UnusedImports">
+            <property name="processJavadoc" value="false" />
+        </module>
+
+        <!-- Redundant imports -->
+        <module name="RedundantImport" />
+
+        <!-- Import order must be: java, javax, org, com -->
+        <module name="ImportOrder">
+            <property name="groups" value="/^java\./,/^javax\./,/^org\./,/^com\./" />
+            <property name="ordered" value="true" />
+            <property name="separated" value="true" />
+            <property name="separatedStaticGroups" value="true" />
+            <property name="caseSensitive" value="true" />
+        </module>
+
+        <!-- ===== Whitespace ===== -->
+        <!-- Whitespace around operators, keywords -->
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true" />
+            <property name="allowEmptyMethods" value="true" />
+            <property name="allowEmptyTypes" value="true" />
+            <property name="allowEmptyLambdas" value="true" />
+            <property name="ignoreEnhancedForColon" value="true" />
+        </module>
+
+        <!-- Whitespace after comma -->
+        <module name="WhitespaceAfterComma" />
+
+        <!-- No whitespace after certain tokens -->
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS" />
+            <property name="allowLineBreaks" value="false" />
+        </module>
+
+        <!-- No whitespace before certain tokens -->
+        <module name="NoWhitespaceBefore">
+            <property name="tokens" value="COMMA,SEMI,POST_INC,POST_DEC" />
+        </module>
+
+        <!-- ===== Indentation ===== -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4" />
+            <property name="braceAdjustment" value="0" />
+            <property name="caseIndent" value="4" />
+            <property name="throwsIndent" value="4" />
+            <property name="lineWrappingIndentation" value="4" />
+            <property name="arrayElementIndent" value="4" />
+        </module>
+
+        <!-- ===== Braces ===== -->
+        <!-- Opening brace must be on same line -->
+        <module name="LeftCurly">
+            <property name="ignoreEnums" value="false" />
+        </module>
+
+        <!-- Closing brace placement -->
+        <module name="RightCurly">
+            <property name="id" value="RightCurly" />
+            <property name="tokens"
+                value="CLASS_DEF,METHOD_DEF,CTOR_DEF,LITERAL_FOR,LITERAL_WHILE,LITERAL_DO,STATIC_INIT,INSTANCE_INIT" />
+        </module>
+
+        <!-- Braces required for blocks -->
+        <module name="NeedBraces">
+            <property name="allowSingleLineStatement" value="false" />
+            <property name="allowSingleLineIf" value="false" />
+        </module>
+
+        <!-- ===== Empty statements ===== -->
+        <module name="EmptyStatement" />
+
+        <!-- ===== Complexity ===== -->
+        <!-- Method complexity should not exceed 10 -->
+        <module name="CyclomaticComplexity">
+            <property name="max" value="10" />
+            <property name="switchBlockAsSingleDecision" value="false" />
+        </module>
+
+        <!-- Nested blocks should not exceed 5 levels -->
+        <module name="NestingLevel">
+            <property name="max" value="5" />
+        </module>
+
+        <!-- ===== Modifiers ===== -->
+        <!-- Check modifier order -->
+        <module name="ModifierOrder" />
+
+        <!-- Redundant modifiers -->
+        <module name="RedundantModifier" />
+
+        <!-- ===== Size violations ===== -->
+        <!-- Parameter number -->
+        <module name="ParameterNumber">
+            <property name="max" value="7" />
+            <property name="ignoreOverriddenMethods" value="true" />
+        </module>
+
+        <!-- ===== Design issues ===== -->
+        <!-- Avoid catching generic Exception -->
+        <module name="AvoidCatchingGenericException">
+            <property name="illegalClassNames"
+                value="java.lang.Exception,java.lang.Throwable,java.lang.RuntimeException" />
+        </module>
+
+        <!-- Avoid throwing generic Exception -->
+        <module name="AvoidThrowingGenericException" />
+
+        <!-- Return count in methods -->
+        <module name="ReturnCount">
+            <property name="max" value="3" />
+            <property name="maxForVoid" value="1" />
+            <property name="tokens" value="METHOD_DEF" />
+        </module>
+
+        <!-- ===== Miscellaneous ===== -->
+        <!-- Exactly one statement per line -->
+        <module name="OneStatementPerLine" />
+
+        <!-- Method parameters on same line -->
+        <module name="MultipleStringLiterals">
+            <property name="allowedDuplicates" value="1" />
+            <property name="ignoreStringsRegexp" value='^(("")|(".")|("\\\\"))$' />
+        </module>
+
+        <!-- No multi-line statements -->
+        <module name="MultipleVariableDeclarations" />
+
+        <!-- Final parameters in methods -->
+        <module name="FinalParameters">
+            <property name="tokens" value="METHOD_DEF,CTOR_DEF,LAMBDA" />
+        </module>
+
+        <!-- Require @Override annotation -->
+        <module name="MissingOverride" />
+
+        <!-- Regexp patterns for comments -->
+        <module name="Regexp">
+            <property name="format" value="System\.out\.println" />
+            <property name="illegalPattern" value="true" />
+            <property name="ignoreComments" value="true" />
+            <message key="regexp.exceeded"
+                value="System.out.println should not be used in production code" />
+        </module>
+
+        <!-- ===== Annotations ===== -->
+        <module name="AnnotationLocation">
+            <property name="id" value="AnnotationLocationMostCases" />
+            <property name="tokens" value="CLASS_DEF,INTERFACE_DEF,ENUM_DEF,METHOD_DEF,CTOR_DEF" />
+        </module>
+
+        <module name="AnnotationLocation">
+            <property name="id" value="AnnotationLocationVariables" />
+            <property name="tokens" value="VARIABLE_DEF" />
+            <property name="allowSamelineMultipleAnnotations" value="true" />
+        </module>
+
+        <!-- Annotation use must be non-null -->
+        <module name="NonEmptyAtclauseDescription" />
+
     </module>
-
-    <!-- Constant names must be UPPER_CASE -->
-    <module name="ConstantName">
-      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
-      <message key="name.invalidPattern" value="Constant name ''{0}'' must match pattern ''{1}''."/>
-    </module>
-
-    <!-- Local variable names -->
-    <module name="LocalVariableName">
-      <property name="format" value="^[a-z]([a-zA-Z0-9]*)?$"/>
-      <property name="allowOneCharVarInForLoop" value="true"/>
-    </module>
-
-    <!-- Parameter names -->
-    <module name="ParameterName">
-      <property name="format" value="^[a-z]([a-zA-Z0-9]*)?$"/>
-    </module>
-
-    <!-- Member variable names -->
-    <module name="MemberName">
-      <property name="format" value="^[a-z]([a-zA-Z0-9]*)?$"/>
-    </module>
-
-    <!-- ===== Imports ===== -->
-    <!-- Avoid wildcard imports -->
-    <module name="AvoidStarImport">
-      <property name="excludes" value="java.io,java.util,java.util.stream,java.util.concurrent"/>
-      <property name="allowClassImports" value="false"/>
-      <property name="allowStaticImports" value="false"/>
-    </module>
-
-    <!-- Detect unused imports -->
-    <module name="UnusedImports">
-      <property name="processJavadoc" value="false"/>
-    </module>
-
-    <!-- Redundant imports -->
-    <module name="RedundantImport"/>
-
-    <!-- Import order must be: java, javax, org, com -->
-    <module name="ImportOrder">
-      <property name="groups" value="/^java\./,/^javax\./,/^org\./,/^com\./"/>
-      <property name="ordered" value="true"/>
-      <property name="separated" value="true"/>
-      <property name="separatedStaticGroups" value="true"/>
-      <property name="caseSensitive" value="true"/>
-    </module>
-
-    <!-- ===== Whitespace ===== -->
-    <!-- Whitespace around operators, keywords -->
-    <module name="WhitespaceAround">
-      <property name="allowEmptyConstructors" value="true"/>
-      <property name="allowEmptyMethods" value="true"/>
-      <property name="allowEmptyTypes" value="true"/>
-      <property name="allowEmptyLambdas" value="true"/>
-      <property name="ignoreEnhancedForColon" value="true"/>
-    </module>
-
-    <!-- Whitespace after comma -->
-    <module name="WhitespaceAfterComma"/>
-
-    <!-- No whitespace after certain tokens -->
-    <module name="NoWhitespaceAfter">
-      <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
-      <property name="allowLineBreaks" value="false"/>
-    </module>
-
-    <!-- No whitespace before certain tokens -->
-    <module name="NoWhitespaceBefore">
-      <property name="tokens" value="COMMA,SEMI,POST_INC,POST_DEC"/>
-    </module>
-
-    <!-- ===== Indentation ===== -->
-    <module name="Indentation">
-      <property name="basicOffset" value="4"/>
-      <property name="braceAdjustment" value="0"/>
-      <property name="caseIndent" value="4"/>
-      <property name="throwsIndent" value="4"/>
-      <property name="lineWrappingIndentation" value="4"/>
-      <property name="arrayElementIndent" value="4"/>
-    </module>
-
-    <!-- ===== Braces ===== -->
-    <!-- Opening brace must be on same line -->
-    <module name="LeftCurly">
-      <property name="ignoreEnums" value="false"/>
-    </module>
-
-    <!-- Closing brace placement -->
-    <module name="RightCurly">
-      <property name="id" value="RightCurly"/>
-      <property name="tokens" value="CLASS_DEF,METHOD_DEF,CTOR_DEF,LITERAL_FOR,LITERAL_WHILE,LITERAL_DO,STATIC_INIT,INSTANCE_INIT"/>
-    </module>
-
-    <!-- Braces required for blocks -->
-    <module name="NeedBraces">
-      <property name="allowSingleLineStatement" value="false"/>
-      <property name="allowSingleLineIf" value="false"/>
-    </module>
-
-    <!-- ===== Empty statements ===== -->
-    <module name="EmptyStatement"/>
-
-    <!-- ===== Complexity ===== -->
-    <!-- Method complexity should not exceed 10 -->
-    <module name="CyclomaticComplexity">
-      <property name="max" value="10"/>
-      <property name="switchBlockAsSingleDecision" value="false"/>
-    </module>
-
-    <!-- Nested blocks should not exceed 5 levels -->
-    <module name="NestingLevel">
-      <property name="max" value="5"/>
-    </module>
-
-    <!-- ===== Modifiers ===== -->
-    <!-- Check modifier order -->
-    <module name="ModifierOrder"/>
-
-    <!-- Redundant modifiers -->
-    <module name="RedundantModifier"/>
-
-    <!-- ===== Size violations ===== -->
-    <!-- Parameter number -->
-    <module name="ParameterNumber">
-      <property name="max" value="7"/>
-      <property name="ignoreOverriddenMethods" value="true"/>
-    </module>
-
-    <!-- ===== Design issues ===== -->
-    <!-- Avoid catching generic Exception -->
-    <module name="AvoidCatchingGenericException">
-      <property name="illegalClassNames" value="java.lang.Exception,java.lang.Throwable,java.lang.RuntimeException"/>
-    </module>
-
-    <!-- Avoid throwing generic Exception -->
-    <module name="AvoidThrowingGenericException"/>
-
-    <!-- Return count in methods -->
-    <module name="ReturnCount">
-      <property name="max" value="3"/>
-      <property name="maxForVoid" value="1"/>
-      <property name="tokens" value="METHOD_DEF"/>
-    </module>
-
-    <!-- ===== Miscellaneous ===== -->
-    <!-- Exactly one statement per line -->
-    <module name="OneStatementPerLine"/>
-
-    <!-- Method parameters on same line -->
-    <module name="MultipleStringLiterals">
-      <property name="allowedDuplicates" value="1"/>
-      <property name="ignoreStringsRegexp" value='^(("")|(".")|("\\\\"))$'/>
-    </module>
-
-    <!-- No multi-line statements -->
-    <module name="MultipleVariableDeclarations"/>
-
-    <!-- Final parameters in methods -->
-    <module name="FinalParameters">
-      <property name="tokens" value="METHOD_DEF,CTOR_DEF,LAMBDA"/>
-    </module>
-
-    <!-- Require @Override annotation -->
-    <module name="MissingOverride"/>
-
-    <!-- Regexp patterns for comments -->
-    <module name="Regexp">
-      <property name="format" value="System\.out\.println"/>
-      <property name="illegalPattern" value="true"/>
-      <property name="ignoreComments" value="true"/>
-      <message key="regexp.exceeded" value="System.out.println should not be used in production code"/>
-    </module>
-
-    <!-- ===== Annotations ===== -->
-    <module name="AnnotationLocation">
-      <property name="id" value="AnnotationLocationMostCases"/>
-      <property name="tokens" value="CLASS_DEF,INTERFACE_DEF,ENUM_DEF,METHOD_DEF,CTOR_DEF"/>
-    </module>
-
-    <module name="AnnotationLocation">
-      <property name="id" value="AnnotationLocationVariables"/>
-      <property name="tokens" value="VARIABLE_DEF"/>
-      <property name="allowSamelineMultipleAnnotations" value="true"/>
-    </module>
-
-    <!-- Annotation use must be non-null -->
-    <module name="NonEmptyAtclauseDescription"/>
-
-  </module>
 
 </module>
