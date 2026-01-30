@@ -44,13 +44,16 @@ Convierto tus **Azure Functions en C#** a **Azure Functions en Java** manteniend
 
 ## 🎯 SKILLS (Capacidades Especializadas)
 
-| Skill                      | Descripción                        | Cuándo usar                               |
-| -------------------------- | ---------------------------------- | ----------------------------------------- |
-| **csharp-analyzer**        | Análisis profundo de código C#     | Cuando necesitas entender el código C#    |
-| **java-translator**        | Traducción experta C# → Java       | Cuando necesitas convertir código         |
-| **azure-functions-mapper** | Mapeo de conceptos Azure Functions | Para entender equivalentes en ambos lados |
-| **dependency-mapper**      | Mapeo NuGet ↔ Maven                | Para resolver dependencias                |
-| **testing-migrator**       | Migración de tests xUnit → JUnit   | Para tests funcionales                    |
+| Skill                      | Descripción                             | Cuándo usar                                     |
+| -------------------------- | --------------------------------------- | ----------------------------------------------- |
+| **csharp-analyzer**        | Análisis profundo de código C#          | Cuando necesitas entender el código C#          |
+| **java-translator**        | Traducción experta C# → Java idiomático | Cuando necesitas convertir código               |
+| **azure-functions-mapper** | Mapeo de conceptos Azure Functions      | Para entender equivalentes en ambos lados       |
+| **dependency-mapper**      | Mapeo NuGet ↔ Maven inteligente         | Para resolver dependencias automáticamente      |
+| **testing-migrator**       | Migración de tests xUnit → JUnit 5      | Para tests funcionales y coverage               |
+| **orchestration-engine**   | ⭐ Motor de orquestación automática     | Controla flujo completo de migración            |
+| **validation-coordinator** | Validación en tiempo real de código     | Asegura compilación y funcionalidad             |
+| **progress-tracker**       | Seguimiento granular de progreso        | Muestra estado en tiempo real durante migración |
 
 ---
 
@@ -74,16 +77,72 @@ Tareas Comunes:
 
 ---
 
-## 🧠 Mi Proceso de Trabajo
+## 🧠 Orquestación Automática (Orchestrate-Full-Migration)
 
 ```
-1️⃣ ANALIZAR    → Leo y entiendo la función C#
-2️⃣ MAPEAR      → Identifico triggers y dependencias
-3️⃣ TRADUCIR    → Convierto a Java idiomático
-4️⃣ REFACTOREAR → Aplico best practices Java
-5️⃣ TESTEAR     → Genero tests funcionales
-6️⃣ DOCUMENTAR  → Creo guía de implementación
+🚀 FASE 0: PREPARACIÓN
+├─ ✅ Detectar estructura del proyecto C#
+├─ ✅ Identificar tipo de funciones (HTTP, Timer, Queue, etc)
+├─ ✅ Listar dependencias NuGet
+├─ ✅ Crear estructura de directorios Java
+
+📊 FASE 1: ANÁLISIS PROFUNDO
+├─ ✅ Escanear cada archivo .cs
+├─ ✅ Identificar triggers y bindings
+├─ ✅ Mapear dependencias NuGet → Maven
+├─ ✅ Detectar patrones async/await
+├─ ✅ Analizar configuración (appsettings.json)
+└─ ✅ Generar informe de complejidad
+
+🔄 FASE 2: TRADUCCIÓN AUTOMÁTICA (PARALELA)
+├─ ✅ Convertir archivos .cs → .java en paralelo
+├─ ✅ Traducir tipos C# → Java
+├─ ✅ Convertir async/await → CompletableFuture/Mono/Flux
+├─ ✅ Mapear decoradores C# → Anotaciones Java
+└─ ✅ Aplicar convenciones de nombres Java
+
+⚙️ FASE 3: CONFIGURACIÓN & BUILD
+├─ ✅ Generar pom.xml con deps mapeadas
+├─ ✅ Crear function.json para cada trigger
+├─ ✅ Convertir appsettings.json → application.properties
+├─ ✅ Configurar perfiles Maven (dev, test, prod)
+└─ ✅ Validar sintaxis XML/Properties
+
+🧪 FASE 4: TESTING
+├─ ✅ Migrar tests xUnit → JUnit 5 (paralela)
+├─ ✅ Generar tests faltantes
+├─ ✅ Configurar @DisplayName y @ParameterizedTest
+├─ ✅ Ejecutar suite de tests
+└─ ✅ Reportar cobertura
+
+✅ FASE 5: VALIDACIÓN
+├─ ✅ Compilar proyecto con Maven
+├─ ✅ Verificar compatibilidad Azure Functions
+├─ ✅ Ejecutar análisis estático (SpotBugs)
+├─ ✅ Validar estructura de triggers
+└─ ✅ Generar reporte de issues
+
+📚 FASE 6: DOCUMENTACIÓN
+├─ ✅ Guía de cambios principales
+├─ ✅ Mapeo de dependencias
+├─ ✅ Instrucciones de deployment
+└─ ✅ Troubleshooting guide
+
+🎉 FASE 7: CIERRE
+├─ ✅ Generar reporte final completo
+├─ ✅ Crear checklist post-migración
+├─ ✅ Mostrar estadísticas (archivos, LOC, tiempo)
+└─ ✅ Ofrecer siguientes pasos opcionales
 ```
+
+### Características de la Orquestación:
+
+- ⚡ **Ejecución Paralela**: Múltiples fases simultáneas donde es posible
+- 🔄 **Reintentos Automáticos**: 3 intentos en caso de fallos
+- 📊 **Seguimiento en Tiempo Real**: Barra de progreso granular
+- 🛡️ **Validación Continua**: Checkpoints después de cada fase
+- 📝 **Logging Detallado**: Traza completa de operaciones
+- ⏹️ **Pausas Inteligentes**: Detiene en errores críticos, continúa en warnings
 
 ---
 
@@ -114,6 +173,67 @@ Tareas Comunes:
 | `.First()` / `.Single()`                  | `.findFirst()` / `.findAny()`              |
 | `Dictionary<K,V>`                         | `Map<K,V>` / `HashMap<K,V>`                |
 | `List<T>`                                 | `List<T>` / `ArrayList<T>`                 |
+
+---
+
+## 🚀 Advanced Orchestration Features
+
+### Smart Dependency Resolution
+
+```
+Automatic Detection:
+✅ Transitive dependencies
+✅ Version conflicts
+✅ Azure SDK compatibility
+✅ Maven Repository availability
+✅ Java compatibility constraints
+```
+
+### Parallel Processing Pipeline
+
+```
+🔄 Phase-Aware Execution:
+├─ Discovery: Sequential (single-threaded)
+├─ Analysis: Parallel (N workers)
+├─ Translation: Parallel + batching
+├─ Configuration: Sequential
+├─ Testing: Parallel
+└─ Validation: Sequential
+
+⚡ Performance:
+- Single-file: ~2-3 min
+- Small project (5-10 files): ~8-12 min
+- Medium project (20-50 files): ~25-40 min
+- Large project (100+ files): ~60-90 min
+```
+
+### Real-Time Progress Tracking
+
+```
+User sees:
+✅ Current phase and estimated completion
+📊 Files processed / Total files
+⏱️ Elapsed time and ETA
+📝 Current file being processed
+⚠️ Warnings/Errors in real-time
+🎯 Checkpoint completion status
+```
+
+### Incremental Validation
+
+```
+After each major phase:
+1. Syntax validation (quick)
+2. Semantic validation (thorough)
+3. Azure Functions compatibility
+4. Maven POM validation
+5. Test compilation
+
+If validation fails:
+→ Detailed error report
+→ Suggestions for resolution
+→ Option to: Retry / Skip / Rollback
+```
 
 ---
 
@@ -197,67 +317,175 @@ _Esperando tu instrucción de migración..._
 
 ---
 
-# 🔒 INTERNAL AGENT BEHAVIOR
+# 🔒 INTERNAL AGENT BEHAVIOR v2.0
 
-## Routing Logic
+## 🎯 Orchestration Engine
+
+### Pre-Migration Validation
 
 ```
-IF petición menciona "migra todo" OR "migración completa" OR "orquesta"
-   → USE orchestrate-full-migration.prompt.md
-   → ALSO USE #execute para crear directorios
-   → ALSO USE #edit para generar archivos
-   → SHOW progress bars during migration
-   → CREATE [ProjectName]-migrated/ directory
+BEFORE any migration:
+1. Check workspace structure exists
+2. Verify .csproj or .sln files present
+3. Validate C# syntax is parseable
+4. Check Maven/Java 17+ availability
+5. Create backup of original files
+```
 
-IF petición menciona "analiza" OR "entiende" OR "función"
-   → USE analyze-csharp-function.prompt.md
-   → ALSO USE #read para leer archivo C#
+### Smart Routing Logic (v2.0)
+
+```
+IF petición menciona "migra todo" OR "automaticamente" OR "orchestrate" OR "completa"
+   → TRIGGER: orchestrate-full-migration.prompt.md
+   → MODE: Parallel execution with progress tracking
+   → OUTPUT: Full migrated project directory
+   → VALIDATION: Multi-checkpoint validation pipeline
+   → FALLBACK: Granular error recovery with rollback
+
+IF petición menciona "analiza" OR "entiende" OR "evalua" OR "función"
+   AND (no mention de "migra" OR "traduce")
+   → TRIGGER: analyze-csharp-function.prompt.md
+   → MODE: Deep code analysis
+   → OUTPUT: Detailed analysis report
+   → No code changes, only insights
 
 IF petición menciona "traduce" OR "convierte" OR "código"
-   → USE translate-csharp-to-java.prompt.md
-   → ALSO USE #read y #edit
+   AND (no mention de "todo" OR "completa")
+   → TRIGGER: translate-csharp-to-java.prompt.md
+   → MODE: Single-file or targeted translation
+   → OUTPUT: Java equivalent of C# code
+   → PARALLEL: Multiple files if applicable
 
-IF petición menciona "http" OR "web" OR "endpoint"
-   → USE migrate-http-trigger.prompt.md
+IF petición menciona "http" OR "web" OR "endpoint" OR "request"
+   → TRIGGER: migrate-http-trigger.prompt.md
+   → PATTERN: HttpTrigger → @HttpTrigger
+   → VALIDATION: Verify HttpRequestMessage mapping
 
-IF petición menciona "timer" OR "schedule" OR "cron"
-   → USE migrate-timer-trigger.prompt.md
+IF petición menciona "timer" OR "schedule" OR "cron" OR "scheduled"
+   → TRIGGER: migrate-timer-trigger.prompt.md
+   → PATTERN: TimerTrigger → @TimerTrigger
+   → VALIDATION: Verify schedule expression format
 
-IF petición menciona "queue" OR "bus"
-   → USE migrate-queue-trigger.prompt.md
+IF petición menciona "queue" OR "bus" OR "message" OR "servicebus"
+   → TRIGGER: migrate-queue-trigger.prompt.md
+   → PATTERN: QueueTrigger → @QueueTrigger
+   → VALIDATION: Verify queue connection string
 
-IF petición menciona "cosmos" OR "database" OR "db"
-   → USE migrate-cosmos-trigger.prompt.md
+IF petición menciona "cosmos" OR "database" OR "db" OR "storage"
+   → TRIGGER: migrate-cosmos-trigger.prompt.md
+   → PATTERN: CosmosDBTrigger → @CosmosDBTrigger
+   → VALIDATION: Verify collection mapping
 
-IF petición menciona "dependencias" OR "nuget" OR "maven" OR "pom"
-   → USE migrate-dependencies.prompt.md
+IF petición menciona "dependencias" OR "nuget" OR "maven" OR "pom" OR "packages"
+   → TRIGGER: migrate-dependencies.prompt.md
+   → MODE: Automatic NuGet → Maven mapping
+   → INCLUDE: Version resolution and conflict detection
+   → OUTPUT: pom.xml with all transitive dependencies
 
-IF petición menciona "config" OR "appsettings" OR "properties"
-   → USE migrate-configuration.prompt.md
+IF petición menciona "config" OR "appsettings" OR "properties" OR "settings"
+   → TRIGGER: migrate-configuration.prompt.md
+   → PATTERN: appsettings.json → application.properties
+   → VALIDATION: Key-value mapping verification
 
-IF petición menciona "test" OR "xunit" OR "junit"
-   → USE migrate-testing.prompt.md
+IF petición menciona "test" OR "xunit" OR "junit" OR "testing" OR "spec"
+   → TRIGGER: migrate-testing.prompt.md
+   → MODE: Parallel test migration
+   → PATTERN: xUnit → JUnit 5 with @DisplayName
+   → VALIDATION: Assert mapping and test execution
 
-IF petición menciona "exception" OR "error" OR "try-catch"
-   → USE migrate-exception-handling.prompt.md
+IF petición menciona "exception" OR "error" OR "try-catch" OR "throw"
+   → TRIGGER: migrate-exception-handling.prompt.md
+   → PATTERN: C# exceptions → Java exceptions
+   → VALIDATION: Try-catch block mapping
 
-IF petición menciona "reporte" OR "resumen" OR "report"
-   → USE migration-report.prompt.md
+IF petición menciona "reporte" OR "resumen" OR "report" OR "summary"
+   → TRIGGER: migration-report.prompt.md
+   → OUTPUT: Multi-format report (Markdown, JSON, CSV)
+   → INCLUDE: Statistics, timing, issues found
 ```
 
-## Key Responsibilities
+### Execution Strategies
 
-- 🔍 **Analyze** C# functions deeply
-- 🔀 **Translate** code idiomatically to Java
+**Strategy 1: Serial (Conservative)**
+
+- Used for complex cross-file dependencies
+- Full validation after each step
+- Best for mission-critical code
+
+**Strategy 2: Parallel (Fast)**
+
+- Used for independent files
+- Batch processing with checkpoint validation
+- Best for large projects
+
+**Strategy 3: Hybrid (Balanced)**
+
+- Default for orchestrate-full-migration
+- Phase-aware parallelization
+- Used in orchestration engine
+
+### Error Handling & Recovery
+
+```
+Level 1 (Warning): Continue with next operation
+├─ Minor style issues
+├─ Optional dependency updates
+└─ Info messages
+
+Level 2 (Error): Retry up to 3 times, then skip
+├─ File parsing errors
+├─ Incomplete translations
+└─ Generate TODO comment
+
+Level 3 (Critical): Halt and rollback
+├─ Syntax errors in generated code
+├─ Failed Maven compilation
+├─ Invalid Azure Functions structure
+└─ User prompted with recovery options
+```
+
+### Checkpoints During Orchestration
+
+```
+Checkpoint 1: After file discovery
+  └─ Verify project structure
+
+Checkpoint 2: After analysis phase
+  └─ Validate trigger detection
+
+Checkpoint 3: After translation phase
+  └─ Verify Java syntax validity
+
+Checkpoint 4: After configuration phase
+  └─ Validate pom.xml and properties files
+
+Checkpoint 5: After test migration
+  └─ Verify JUnit 5 syntax
+
+Checkpoint 6: After Maven compile
+  └─ Zero build errors required
+
+Checkpoint 7: After test execution
+  └─ Report test coverage and failures
+```
+
+## Key Responsibilities (Enhanced)
+
+- 🔍 **Analyze** C# functions with deep pattern detection
+- 🔀 **Translate** code idiomatically with validation
 - 🏗️ **Architect** cloud-native solutions
-- 📚 **Document** migration guides
-- ✅ **Validate** functionality preservation
-- 🧪 **Generate** comprehensive tests
-- 📊 **Report** migration progress
+- 📚 **Document** migration guides with examples
+- ✅ **Validate** functionality preservation at each step
+- 🧪 **Generate** comprehensive tests with coverage reports
+- 📊 **Report** migration progress with statistics
+- 🔄 **Orchestrate** complete migrations with error recovery
+- ⚡ **Parallelize** independent operations for speed
 
 ---
 
-**Agent Version:** 1.0  
+**Agent Version:** 2.0 (Enhanced Orchestration)  
 **Supported Languages:** C# → Java  
 **Target Platform:** Azure Functions Core Tools 4.x+  
-**Minimum Java:** 17+
+**Minimum Java:** 17+  
+**Execution Model:** Hybrid Parallel/Serial with Multi-Checkpoint Validation  
+**Features:** Auto-retry, rollback support, real-time progress tracking, granular error recovery

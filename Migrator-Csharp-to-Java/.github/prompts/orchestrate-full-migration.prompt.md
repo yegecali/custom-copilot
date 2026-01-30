@@ -1,494 +1,630 @@
-# 🚀 Orchestrate Full Migration: Automated End-to-End Migration
+# 🚀 Orchestrate Full Migration Prompt
 
-## Objective
+**Triggered when user says:** "migra todo", "migración completa", "automaticamente", "orchestrate"
 
-Orchestrate a complete, automated migration from C# to Java with progress tracking, directory creation, and organized output.
+---
 
-## Context
+## 🎯 Mission
 
-- User wants full automation
-- Start with directory exploration
-- Create organized migrated project structure
-- Show progress at each step
-- Generate all necessary files
+Execute a complete, automated migration of Azure Functions from C# to Java with real-time progress tracking, multi-checkpoint validation, and automatic error recovery.
 
-## Instructions
+---
 
-You are the migration orchestrator. Execute this complete workflow:
+## 📋 Pre-Flight Checklist
 
-### Phase 1: Discovery & Setup
+Before starting migration, verify:
 
-**Step 1.1: Explore Project Structure**
+- [ ] Workspace contains C# Azure Functions project
+- [ ] `.csproj` or `.sln` files are present
+- [ ] C# code is syntactically valid
+- [ ] Java 17+ is available on system
+- [ ] Maven 3.9+ is installed
+- [ ] Azure Functions Core Tools installed (optional but recommended)
 
-```
-📂 DISCOVERY PHASE
-├─ 1. List the current directory structure
-├─ 2. Identify all .cs files
-├─ 3. Identify all .csproj files
-├─ 4. Find all test files (*.Tests.cs)
-└─ 5. Show summary of files found
-```
+**If any check fails:** Stop and notify user with specific remediation steps.
 
-**Command to execute:**
+---
 
-```bash
-find . -type f \( -name "*.cs" -o -name "*.csproj" -o -name "*.json" \) | head -20
-```
+## 🔄 EXECUTION PHASES (Automated)
 
-**Output format:**
+### Phase 0: Preparation (5 min)
 
 ```
-📁 PROJECT STRUCTURE ANALYSIS
-=====================================
-Project Root: [path]
-Total .cs files: [count]
-Total .csproj files: [count]
-Total Test files: [count]
-Configuration files: [list]
+🎯 GOALS:
+- Create project structure
+- Initialize tracking system
+- Generate backup
 
-Sample Files Found:
-├── [File1.cs]
-├── [File2.cs]
-├── [Project.csproj]
-└── appsettings.json
+ACTIONS:
+1. Analyze workspace structure
+   └─ Scan for .csproj, .sln, .cs files
+
+2. Create [ProjectName]-migrated/ directory
+   └─ Create src/main/java, src/test/java, src/main/resources
+
+3. Initialize progress tracking
+   └─ Create migration.log and progress.json
+
+4. Backup original C# project
+   └─ Create backup timestamp folder
+
+5. Detect project metadata
+   ├─ Project name
+   ├─ Project description
+   ├─ Current .NET version
+   └─ Target Java version (default: 17)
+
+CHECKPOINT VALIDATION:
+✅ Directory structure created
+✅ Backup exists
+✅ Metadata extracted
+```
+
+### Phase 1: Deep Analysis (10-15 min)
+
+```
+🎯 GOALS:
+- Understand complete project
+- Detect all triggers and bindings
+- Map all dependencies
+- Identify patterns and complexity
+
+ACTIONS:
+1. File Discovery
+   ├─ List all .cs files
+   ├─ Identify test files (Test.cs, *Tests.cs)
+   ├─ Locate configuration files (appsettings.json, .csproj)
+   └─ Count LOC and file complexity
+
+2. Trigger Detection
+   ├─ Find @HttpTrigger functions
+   ├─ Find @TimerTrigger functions
+   ├─ Find @QueueTrigger functions
+   ├─ Find @CosmosDBTrigger functions
+   ├─ Find @BlobTrigger functions
+   └─ Find @ServiceBusTrigger functions
+
+3. Dependency Analysis
+   ├─ Parse .csproj for NuGet packages
+   ├─ Identify version constraints
+   ├─ Detect custom libraries
+   ├─ Check for deprecated packages
+   └─ Flag potential compatibility issues
+
+4. Code Pattern Detection
+   ├─ Count async/await usage
+   ├─ Detect LINQ queries
+   ├─ Identify Entity Framework usage
+   ├─ Find exception handling patterns
+   ├─ Detect custom attributes/annotations
+   └─ Identify logging statements
+
+5. Configuration Analysis
+   ├─ Parse appsettings.json
+   ├─ Extract connection strings
+   ├─ Identify environment-specific configs
+   └─ Detect secrets/sensitive data
+
+CHECKPOINT VALIDATION:
+✅ All .cs files identified
+✅ All triggers detected
+✅ All dependencies mapped
+✅ Generate analysis report
+```
+
+**Output:** `analysis-report.json` with detailed findings
+
+### Phase 2: Parallel Translation (20-30 min)
+
+```
+🎯 GOALS:
+- Convert all .cs files to .java
+- Apply Java idioms and best practices
+- Generate structurally sound Java code
+
+ACTIONS (PARALLEL for multiple files):
+For each .cs file:
+
+1. Pre-Translation Analysis
+   ├─ Detect class structure
+   ├─ Identify methods and signatures
+   ├─ Find triggers/bindings
+   ├─ Detect dependencies
+   └─ Calculate complexity score
+
+2. Code Translation
+   ├─ Convert async Task<T> → CompletableFuture<T>/Mono<T>
+   ├─ Convert IEnumerable → Stream/List
+   ├─ Convert Dictionary → Map/HashMap
+   ├─ Convert LINQ → Stream API
+   ├─ Convert using statements → try-with-resources
+   ├─ Convert null-coalescing (??) → Optional
+   ├─ Convert string interpolation → proper format
+   ├─ Convert attributes → annotations
+   └─ Convert exception handling
+
+3. Azure Functions Mapping
+   ├─ Map [FunctionName] → @FunctionName
+   ├─ Map [HttpTrigger] → @HttpTrigger
+   ├─ Map [TimerTrigger] → @TimerTrigger
+   ├─ Map [QueueTrigger] → @QueueTrigger
+   ├─ Map [CosmosDBTrigger] → @CosmosDBTrigger
+   ├─ Map ILogger → SLF4J Logger
+   ├─ Map ExecutionContext → same interface
+   └─ Map binding parameters → annotations
+
+4. Formatting & Style
+   ├─ Apply Java conventions
+   ├─ Fix indentation (4 spaces)
+   ├─ Add missing imports
+   ├─ Organize method order
+   ├─ Add javadoc comments
+   └─ Ensure 120-char line limit
+
+5. Validation
+   ├─ Compile check with javac
+   ├─ Verify imports exist
+   ├─ Check annotation syntax
+   └─ Flag TODO items
+
+BATCHING STRATEGY:
+- Files < 100 LOC: Batch 5 files per worker
+- Files 100-500 LOC: Batch 2 files per worker
+- Files > 500 LOC: 1 file per worker
+
+CHECKPOINT VALIDATION:
+✅ No syntax errors in generated .java
+✅ All imports resolved (or TODO marked)
+✅ All triggers mapped
+✅ Coverage: 100% of .cs files translated
+```
+
+**Output:** All .java files in `src/main/java/` and `src/test/java/`
+
+### Phase 3: Configuration Generation (5-10 min)
+
+```
+🎯 GOALS:
+- Generate Maven configuration
+- Create Azure Functions config
+- Convert application settings
+
+ACTIONS:
+
+1. Generate pom.xml
+   ├─ Set Java version to 17 (configurable)
+   ├─ Set Spring Boot version (3.x)
+   ├─ Map all NuGet → Maven dependencies
+   ├─ Add Azure Functions maven plugin
+   ├─ Add test dependencies (JUnit 5, Mockito)
+   ├─ Add code quality plugins (SpotBugs, Checkstyle)
+   ├─ Add compiler settings
+   └─ Validate pom.xml schema
+
+2. Generate function.json for each trigger
+   ├─ HTTP: method, route, auth level
+   ├─ Timer: schedule expression
+   ├─ Queue: queue name, connection
+   ├─ Cosmos: database, collection, connection
+   └─ Generate in src/main/resources/
+
+3. Convert appsettings.json
+   ├─ Parse JSON structure
+   ├─ Convert to application.properties format
+   ├─ Create profiles (application-dev.properties, etc)
+   ├─ Flag secrets for Azure Key Vault
+   └─ Generate in src/main/resources/
+
+4. Create .gitignore
+   ├─ Add Maven patterns (target/, *.class)
+   ├─ Add IDE patterns (.idea/, .vscode/)
+   ├─ Add OS patterns (.DS_Store, Thumbs.db)
+   └─ Add secrets patterns (*.env, credentials)
+
+5. Create README migration guide
+   ├─ Project overview
+   ├─ Build instructions
+   ├─ Deployment instructions
+   ├─ Environment setup
+   └─ Troubleshooting guide
+
+CHECKPOINT VALIDATION:
+✅ pom.xml is valid XML and Maven-compatible
+✅ function.json files are valid JSON
+✅ application.properties are parseable
+✅ No missing required properties
+```
+
+**Output:** `pom.xml`, `function.json`, `application.properties`, `README-MIGRATION.md`
+
+### Phase 4: Testing Migration (10-15 min)
+
+```
+🎯 GOALS:
+- Migrate all unit tests from xUnit to JUnit 5
+- Generate missing tests
+- Ensure test coverage
+
+ACTIONS (PARALLEL for test files):
+
+1. Test File Discovery
+   ├─ Find *Test.cs or Tests.cs files
+   ├─ Parse test structure
+   ├─ Identify test classes and methods
+   └─ Map assertions and attributes
+
+2. xUnit → JUnit 5 Conversion
+   ├─ [Fact] → @Test
+   ├─ [Theory] → @ParameterizedTest
+   ├─ Assert.Equal → assertEquals
+   ├─ Assert.True → assertTrue
+   ├─ Assert.Throws<T> → assertThrows
+   ├─ [InlineData] → @ValueSource
+   ├─ IAsyncLifetime → @BeforeEach/@AfterEach
+   └─ TestFixture → @ExtendWith
+
+3. Test Method Enhancement
+   ├─ Add @DisplayName with descriptive names
+   ├─ Convert AAA (Arrange-Act-Assert) comments
+   ├─ Add parameterized test names
+   ├─ Convert mocking libraries (Moq → Mockito)
+   └─ Add timeout annotations
+
+4. Missing Test Generation
+   ├─ Identify untested public methods
+   ├─ Generate skeleton tests
+   ├─ Add TODO comments for implementation
+   └─ Generate 80% code coverage
+
+5. Test Configuration
+   ├─ Create test dependencies in pom.xml
+   ├─ Add JUnit 5, Mockito, AssertJ
+   ├─ Configure test runner
+   └─ Create application-test.properties
+
+CHECKPOINT VALIDATION:
+✅ All tests have @Test or @ParameterizedTest
+✅ No xUnit artifacts remaining
+✅ Test compilation successful
+✅ All test imports resolved
+```
+
+**Output:** All test files in `src/test/java/`
+
+### Phase 5: Validation & Build (10-15 min)
+
+```
+🎯 GOALS:
+- Validate all generated code
+- Execute Maven build
+- Run test suite
+- Perform static analysis
+
+ACTIONS:
+
+1. Pre-Build Validation
+   ├─ Check pom.xml validity
+   ├─ Verify all Java files compile
+   ├─ Validate Azure Functions structure
+   ├─ Check @FunctionName uniqueness
+   └─ Verify trigger configurations
+
+2. Maven Build
+   ├─ Clean: mvn clean
+   ├─ Compile: mvn compile
+   ├─ Test: mvn test
+   ├─ Package: mvn package
+   ├─ Generate site: mvn site (optional)
+   └─ Report on: Build time, LOC, coverage
+
+3. Test Execution
+   ├─ Run full test suite
+   ├─ Collect coverage metrics
+   ├─ Report pass/fail counts
+   ├─ Generate test report
+   └─ Flag failing tests with suggestions
+
+4. Static Analysis (Optional)
+   ├─ Run SpotBugs: mvn spotbugs:check
+   ├─ Run Checkstyle: mvn checkstyle:check
+   ├─ Report findings
+   └─ Suggest fixes
+
+5. Functional Validation
+   ├─ Verify HTTP endpoints are mapped
+   ├─ Verify trigger decorators are present
+   ├─ Verify connection strings configured
+   ├─ Verify logging is configured
+   └─ Generate validation report
+
+CHECKPOINT VALIDATION:
+✅ Zero build errors (critical failures → rollback)
+✅ All tests pass OR documented known failures
+✅ Coverage above threshold (default: 70%)
+✅ Azure Functions structure valid
+```
+
+**Output:** `build-report.json`, `test-report.html`, validation logs
+
+### Phase 6: Documentation (5-10 min)
+
+```
+🎯 GOALS:
+- Create comprehensive migration documentation
+- Generate runbooks for deployment
+- Document breaking changes
+
+ACTIONS:
+
+1. Migration Summary Document
+   ├─ Project overview
+   ├─ Migration scope and timeline
+   ├─ Files migrated: [count] .cs → .java
+   ├─ Major patterns converted
+   ├─ Triggers identified: [list]
+   └─ Dependencies mapped: [count]
+
+2. Dependency Mapping Guide
+   ├─ NuGet packages → Maven artifacts
+   ├─ Version mappings
+   ├─ Notable replacements (Entity Framework → JPA)
+   ├─ Breaking changes
+   └─ Migration notes per dependency
+
+3. Deployment Guide
+   ├─ Local development setup
+   ├─ Azure Functions deployment steps
+   ├─ Environment variable configuration
+   ├─ Connection string setup
+   ├─ Azure Key Vault integration
+   └─ Troubleshooting section
+
+4. Breaking Changes Document
+   ├─ Behavioral differences
+   ├─ Configuration changes
+   ├─ API endpoint changes (if any)
+   ├─ Error handling differences
+   └─ Performance considerations
+
+5. Troubleshooting Guide
+   ├─ Common issues and solutions
+   ├─ Debugging tips
+   ├─ Performance tuning
+   ├─ Logging and monitoring
+   └─ Support contacts
+
+CHECKPOINT VALIDATION:
+✅ All documents generated
+✅ Links are valid
+✅ Code examples compile
+```
+
+**Output:** Markdown files in `docs/`
+
+### Phase 7: Final Report & Summary (2-5 min)
+
+```
+🎯 GOALS:
+- Summarize migration results
+- Provide post-migration checklist
+- Show statistics and insights
+
+ACTIONS:
+
+1. Migration Statistics
+   ├─ Total execution time
+   ├─ Files processed: [count]
+   ├─ Lines of code: [original] → [migrated]
+   ├─ Test coverage: [%]
+   ├─ Build time: [seconds]
+   └─ Issues found and resolved: [count]
+
+2. Quality Metrics
+   ├─ Code compilation: ✅ 0 errors
+   ├─ Test results: ✅ 95/100 passed
+   ├─ Code coverage: ✅ 82%
+   ├─ Static analysis: ✅ 3 warnings
+   └─ Azure Functions compatibility: ✅ Valid
+
+3. Detailed Results
+   ├─ Phase completion: [all phases ✅]
+   ├─ Files by category:
+   │   ├─ Triggers migrated: 5
+   │   ├─ Utility classes: 12
+   │   ├─ Models/Entities: 8
+   │   └─ Tests generated: 10
+   ├─ Dependencies:
+   │   ├─ Mapped: 24/24
+   │   ├─ Conflicts resolved: 2
+   │   └─ Version updates: 0
+   └─ Configuration:
+       ├─ pom.xml: ✅ Generated
+       ├─ function.json: ✅ Generated
+       └─ application.properties: ✅ Generated
+
+4. Post-Migration Checklist
+   [ ] Review generated Java code
+   [ ] Execute tests locally
+   [ ] Configure Azure resources
+   [ ] Deploy to dev environment
+   [ ] Test triggers in Azure
+   [ ] Update CI/CD pipelines
+   [ ] Train team on Java code
+   [ ] Schedule production deployment
+
+5. Next Steps
+   ├─ Recommended: Review trigger handlers
+   ├─ Optional: Optimize async patterns
+   ├─ Optional: Add integration tests
+   ├─ Optional: Configure monitoring/alerting
+   └─ Optional: Performance tuning
+
+CHECKPOINT VALIDATION:
+✅ All statistics calculated
+✅ Report generated
+✅ Checklist created
+```
+
+**Output:** `migration-report.md`, `migration-report.json`
+
+---
+
+## ⚠️ Error Handling Strategy
+
+### Level 1: Warning (Non-blocking)
+
+```
+Examples:
+- Minor code style issues
+- Optional dependency updates
+- Info-level logging statements
+
+Action:
+→ Log warning
+→ Continue execution
+→ Add to report section "Warnings"
+```
+
+### Level 2: Error (Retriable)
+
+```
+Examples:
+- File parsing errors
+- Incomplete translations
+- Transient network issues
+
+Action:
+→ Log error
+→ Retry up to 3 times with backoff
+→ If still failing, skip file and continue
+→ Add TODO comment in generated code
+→ Add to report section "Errors - Skipped"
+```
+
+### Level 3: Critical (Non-retriable)
+
+```
+Examples:
+- Syntax errors in generated .java files
+- Failed Maven compilation
+- Invalid Azure Functions structure
+- Corrupted pom.xml
+
+Action:
+→ Log critical error with full stack
+→ HALT orchestration
+→ Initiate ROLLBACK:
+   ├─ Delete partially migrated files
+   ├─ Restore from backup
+   ├─ Display error to user
+   └─ Suggest manual fixes
+→ Offer user options:
+   ├─ Fix and retry specific phase
+   ├─ Skip this file and continue
+   ├─ Abort and keep backup
+   └─ Contact support
 ```
 
 ---
 
-### Phase 2: Directory Creation
-
-**Step 2.1: Create Migrated Project Directory**
+## 🔄 Retry Strategy
 
 ```
-📂 DIRECTORY CREATION PHASE
-├─ 1. Get project name from current directory
-├─ 2. Create directory: [ProjectName]-migrated
-├─ 3. Create subdirectories:
-│  ├─ src/main/java/com/example/[projectname]/
-│  ├─ src/test/java/com/example/[projectname]/
-│  ├─ src/main/resources/
-│  ├─ config/
-│  └─ docs/
-└─ 4. Show directory tree created
-```
+For retriable errors:
+Attempt 1: Immediate (0 second delay)
+Attempt 2: After 2 seconds
+Attempt 3: After 5 seconds
 
-**Commands to create structure:**
-
-```bash
-# Create main directory
-mkdir -p [ProjectName]-migrated/src/main/java/com/example/[projectname]
-mkdir -p [ProjectName]-migrated/src/test/java/com/example/[projectname]
-mkdir -p [ProjectName]-migrated/src/main/resources
-mkdir -p [ProjectName]-migrated/config
-mkdir -p [ProjectName]-migrated/docs
-
-# Show structure
-tree [ProjectName]-migrated
-```
-
-**Output format:**
-
-```
-✅ DIRECTORY STRUCTURE CREATED
-=====================================
-📂 PaymentFunction-migrated/
-├── 📂 src/
-│   ├── 📂 main/java/com/example/payment/
-│   │   ├── 📄 PaymentProcessor.java
-│   │   └── 📂 models/
-│   └── 📂 test/java/com/example/payment/
-│       └── 📄 PaymentProcessorTests.java
-├── 📂 src/main/resources/
-│   └── 📄 application.properties
-├── 📂 config/
-│   ├── 📄 pom.xml
-│   ├── 📄 function.json
-│   ├── 📄 host.json
-│   └── 📄 local.settings.json
-├── 📂 docs/
-│   ├── 📄 MIGRATION_REPORT.md
-│   └── 📄 IMPLEMENTATION_GUIDE.md
-└── 📄 README.md
+If all 3 attempts fail:
+→ Log final failure
+→ Skip file/operation
+→ Continue with next item
+→ Mark in report as "Partial Migration"
 ```
 
 ---
 
-### Phase 3: Analysis & Planning
+## ✅ Success Criteria
 
-**Step 3.1: Deep Analysis**
+Migration is considered **SUCCESSFUL** when:
+
+- ✅ Phase 0-7 all completed or safely skipped
+- ✅ Zero critical errors
+- ✅ Maven build with 0 errors
+- ✅ All tests compile
+- ✅ 70%+ test pass rate
+- ✅ Azure Functions structure valid
+- ✅ Documentation generated
+- ✅ Report shows actionable summary
+
+Migration is **PARTIAL** when:
+
+- ⚠️ Some files skipped due to Level 2 errors
+- ⚠️ Build succeeds but with warnings
+- ⚠️ Some tests failing but documented
+- ⚠️ Manual intervention needed for [specific files]
+
+Migration **FAILED** when:
+
+- ❌ Critical error encountered and rollback activated
+- ❌ Maven build failed with errors
+- ❌ Azure Functions validation failed
+- ❌ User aborted mid-migration
+
+---
+
+## 📊 Real-Time Progress Display
 
 ```
-📊 ANALYSIS PHASE
-├─ 1. Analyze all C# files
-├─ 2. Identify triggers and bindings
-├─ 3. Map all dependencies
-├─ 4. Calculate complexity metrics
-└─ 5. Create migration plan
-```
+🚀 MIGRACIÓN COMPLETA EN PROGRESO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Output format:**
+📍 Fase: 2/7 - Translation (Parallel)
+⏱️  Tiempo: 15m 23s / ~45m estimado
 
-```
-📊 MIGRATION ANALYSIS REPORT
-=====================================
+📊 Progreso Global: ████████░░░░░░░░░░░░░░ 42%
 
-FUNCTIONS FOUND: [Count]
-┌─ Function: [Name]
-│  ├─ Trigger: [Type] (HTTP/Timer/Queue/etc)
-│  ├─ Route: [Route pattern]
-│  ├─ Methods: [GET, POST, etc]
-│  ├─ Complexity: [Score]
-│  ├─ Dependencies: [List]
-│  └─ Estimated Effort: [Hours]
-└─ ...
+Fase 0 (Preparation):     ✅ Completado (3m 12s)
+Fase 1 (Analysis):        ✅ Completado (8m 45s)
+Fase 2 (Translation):     🔄 En progreso
+  ├─ Processed: 12/28 files
+  ├─ Current: CardPaymentProcessor.cs → CardPaymentProcessor.java
+  ├─ Batches: 3/5 completados
+  └─ ETA: 8m 30s
+Fase 3 (Configuration):   ⏳ Pendiente
+Fase 4 (Testing):         ⏳ Pendiente
+Fase 5 (Validation):      ⏳ Pendiente
+Fase 6 (Documentation):   ⏳ Pendiente
+Fase 7 (Summary):         ⏳ Pendiente
 
-DEPENDENCIES FOUND: [Count]
-├─ Microsoft.Azure.Functions v4.0
-├─ Newtonsoft.Json v13.0
-└─ ...
+⚠️  Warnings: 2
+  - [Info] Optional dependency update available
+  - [Info] One async method using Task.Result
 
-CONFIGURATION FILES:
-├─ appsettings.json
-├─ .csproj
-└─ ...
-
-TOTAL MIGRATION EFFORT: [X hours]
-ESTIMATED COMPLEXITY: [Easy/Medium/Hard]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
 
-### Phase 4: Code Migration
+## 🎯 When to Use This Prompt
 
-**Step 4.1: Migrate Each Function**
+**USE this prompt when:**
 
-```
-🔄 CODE MIGRATION PHASE
-├─ For each .cs file:
-│  ├─ 1. Analyze function
-│  ├─ 2. Translate to Java
-│  ├─ 3. Generate .java file in migrated dir
-│  ├─ 4. Add to progress tracker
-│  └─ 5. Show progress bar
-└─ Generate summary
-```
+- User says "migra todo"
+- User says "migración automática completa"
+- User says "orchestrate full migration"
+- User wants to migrate entire project in one go
+- Time is critical and full automation needed
 
-**Progress display:**
+**DO NOT use when:**
 
-```
-🔄 MIGRATING SOURCE CODE
-=====================================
-[████████░░░░░░░░░░░] 50% (5/10 files)
-
-✅ PaymentProcessor.cs → PaymentProcessor.java
-✅ Models/PaymentRequest.cs → models/PaymentRequest.java
-✅ Models/PaymentResult.cs → models/PaymentResult.java
-⏳ Services/PaymentService.cs (in progress...)
-⬜ Tests/PaymentProcessorTests.cs (pending)
-
-Estimated Time Remaining: 15 minutes
-```
-
-**Output per file:**
-
-```
-✅ MIGRATED: PaymentProcessor.cs
-=====================================
-📍 Location: src/main/java/com/example/payment/PaymentProcessor.java
-📊 Stats:
-  - Lines of Code: 145
-  - Complexity: 8
-  - Methods: 5
-  - Async Operations: 3
-📝 Changes Applied:
-  ✓ async Task → CompletableFuture
-  ✓ HttpRequest → HttpRequestMessage
-  ✓ ILogger → SLF4J Logger
-  ✓ Dependency Injection setup
-```
+- User wants to migrate single function only
+- User wants step-by-step control
+- User wants to analyze without migrating
+- User wants specific trigger-type migration
 
 ---
 
-### Phase 5: Configuration Migration
-
-**Step 5.1: Migrate Configuration**
-
-```
-⚙️ CONFIGURATION MIGRATION PHASE
-├─ 1. Convert appsettings.json → application.properties
-├─ 2. Generate pom.xml from .csproj
-├─ 3. Create function.json
-├─ 4. Create host.json
-└─ 5. Create local.settings.json
-```
-
-**Output format:**
-
-```
-⚙️ CONFIGURATION FILES GENERATED
-=====================================
-✅ config/pom.xml (157 lines)
-   └─ Maven dependencies resolved: 12
-   └─ Conflict resolution: 2
-✅ config/function.json (28 lines)
-✅ config/host.json (15 lines)
-✅ config/local.settings.json (12 lines)
-✅ src/main/resources/application.properties (24 lines)
-```
-
----
-
-### Phase 6: Testing Migration
-
-**Step 6.1: Migrate Test Suite**
-
-```
-🧪 TESTING MIGRATION PHASE
-├─ For each test file:
-│  ├─ 1. Convert xUnit → JUnit 5
-│  ├─ 2. Convert Moq → Mockito
-│  ├─ 3. Update assertions
-│  └─ 4. Generate .java test file
-└─ Show test coverage
-```
-
-**Progress display:**
-
-```
-🧪 MIGRATING TESTS
-=====================================
-[███████░░░░░░░░░░░░] 35% (3/8 test files)
-
-✅ PaymentProcessorTests.cs → PaymentProcessorTests.java
-✅ ModelsTests.cs → ModelsTests.java
-⏳ IntegrationTests.cs (in progress...)
-⬜ E2ETests.cs (pending)
-
-Test Coverage: 95%
-Estimated Time: 20 minutes
-```
-
-**Output format:**
-
-```
-✅ TESTS MIGRATED
-=====================================
-✅ src/test/java/com/example/payment/PaymentProcessorTests.java
-   └─ Test Methods: 8
-   └─ Assertions: 24
-   └─ Mocks: 3
-   └─ Coverage: 95%
-```
-
----
-
-### Phase 7: Validation & Quality Checks
-
-**Step 7.1: Validate Migration**
-
-```
-✅ VALIDATION PHASE
-├─ 1. Syntax validation
-├─ 2. Compile Java code
-├─ 3. Run unit tests
-├─ 4. Check coverage
-└─ 5. Security scan
-```
-
-**Output format:**
-
-```
-✅ VALIDATION RESULTS
-=====================================
-[✓] Syntax Check: PASSED
-[✓] Java Compilation: SUCCESS (0 errors, 0 warnings)
-[✓] Unit Tests: PASSED (35/35 tests)
-[✓] Test Coverage: 95% (Target: 85%) ✅
-[✓] Security Scan: PASSED (0 critical issues)
-
-Overall Status: ✅ READY FOR PRODUCTION
-```
-
----
-
-### Phase 8: Documentation & Reporting
-
-**Step 8.1: Generate Documentation**
-
-```
-📚 DOCUMENTATION PHASE
-├─ 1. Generate MIGRATION_REPORT.md
-├─ 2. Generate IMPLEMENTATION_GUIDE.md
-├─ 3. Generate API_DOCUMENTATION.md
-├─ 4. Create architecture diagrams
-└─ 5. Create deployment guide
-```
-
-**Output format:**
-
-```
-📚 DOCUMENTATION GENERATED
-=====================================
-✅ docs/MIGRATION_REPORT.md (250 lines)
-   └─ Executive Summary
-   └─ File-by-file changes
-   └─ Dependency mapping
-   └─ Performance analysis
-   └─ Lessons learned
-
-✅ docs/IMPLEMENTATION_GUIDE.md (180 lines)
-   └─ Setup instructions
-   └─ Build process
-   └─ Deployment steps
-   └─ Troubleshooting
-
-✅ docs/API_DOCUMENTATION.md (120 lines)
-   └─ Endpoint documentation
-   └─ Request/Response examples
-   └─ Error codes
-
-✅ README.md (Root directory)
-   └─ Quick start guide
-   └─ Project structure
-   └─ How to run
-```
-
----
-
-### Phase 9: Final Summary & Next Steps
-
-**Step 9.1: Complete Migration**
-
-```
-🎉 MIGRATION COMPLETE
-═══════════════════════════════════════
-
-📊 MIGRATION STATISTICS
-├─ Files Migrated: 12/12 ✅
-├─ Lines of Code: 2,847
-├─ Test Coverage: 95%
-├─ Build Status: ✅ SUCCESS
-├─ Time Taken: 45 minutes
-└─ Status: ✅ READY FOR DEPLOYMENT
-
-📂 MIGRATED PROJECT STRUCTURE
-PaymentFunction-migrated/
-├── src/main/java/com/example/payment/
-│   ├── PaymentProcessor.java ✅
-│   ├── PaymentService.java ✅
-│   └── models/ ✅
-├── src/test/java/com/example/payment/ ✅
-├── src/main/resources/
-│   └── application.properties ✅
-├── config/
-│   ├── pom.xml ✅
-│   ├── function.json ✅
-│   ├── host.json ✅
-│   └── local.settings.json ✅
-├── docs/ ✅
-├── README.md ✅
-└── .gitignore ✅
-
-📋 NEXT STEPS:
-1️⃣  Review the migration report: docs/MIGRATION_REPORT.md
-2️⃣  Read implementation guide: docs/IMPLEMENTATION_GUIDE.md
-3️⃣  Build the project: cd PaymentFunction-migrated && mvn clean package
-4️⃣  Run tests: mvn test
-5️⃣  Deploy to Azure: func azure functionapp publish <FunctionAppName>
-
-🎯 DEPLOYMENT CHECKLIST:
-□ Code review completed
-□ All tests passing
-□ Performance validated
-□ Security scan passed
-□ Staging deployment successful
-□ UAT testing completed
-□ Ready for production deployment
-```
-
----
-
-## Complete Workflow Timeline
-
-```
-START: 10:00 AM
-│
-├─ 10:00 - 10:05: Phase 1 - Discovery (5 min)
-│  └─ List project, identify files
-│
-├─ 10:05 - 10:10: Phase 2 - Directory Setup (5 min)
-│  └─ Create migrated directory structure
-│
-├─ 10:10 - 10:20: Phase 3 - Analysis (10 min)
-│  └─ Deep code analysis, plan migration
-│
-├─ 10:20 - 10:45: Phase 4 - Code Migration (25 min)
-│  └─ Translate all .cs to .java files
-│
-├─ 10:45 - 10:55: Phase 5 - Configuration (10 min)
-│  └─ Generate pom.xml, configs, etc
-│
-├─ 10:55 - 11:15: Phase 6 - Testing (20 min)
-│  └─ Migrate and run all tests
-│
-├─ 11:15 - 11:20: Phase 7 - Validation (5 min)
-│  └─ Compile, test, security check
-│
-├─ 11:20 - 11:25: Phase 8 - Documentation (5 min)
-│  └─ Generate guides and reports
-│
-└─ 11:25: Phase 9 - Complete (✅ READY)
-   └─ Project ready for deployment
-
-TOTAL TIME: ~85 minutes
-```
-
----
-
-## How to Use This Prompt
-
-**Command:**
-
-```
-@csharp-to-java-migrator migra todo automaticamente
-```
-
-Or:
-
-```
-@csharp-to-java-migrator #execute orquesta migración completa
-```
-
-**What happens:**
-
-1. Agent explores your project
-2. Creates organized migrated directory
-3. Analyzes code and creates plan
-4. Migrates all source files
-5. Migrates configuration
-6. Migrates tests
-7. Validates everything
-8. Generates complete documentation
-9. Shows next steps
-
----
-
-## Expected Outcomes
-
-After running this orchestration, you'll have:
-
-✅ **Complete Java project** in `[ProjectName]-migrated/`  
-✅ **pom.xml** with all Maven dependencies  
-✅ **Migrated source code** (all .cs → .java)  
-✅ **Migrated tests** (xUnit → JUnit 5)  
-✅ **Configuration files** (appsettings → properties)  
-✅ **Azure Functions config** (function.json, host.json)  
-✅ **Complete documentation** (guides, reports, API docs)  
-✅ **Build-ready project** (mvn package ready)  
-✅ **Deployment checklist** (for production)
-
----
-
-## Tags
-
-#orchestration #full-migration #automation #progress-tracking #end-to-end
+**Last Updated:** January 2025
+**Version:** 2.0
+**Owner:** Migration Specialist Agent
