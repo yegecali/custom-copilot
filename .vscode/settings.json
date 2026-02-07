@@ -45,5 +45,6 @@
     "**/node_modules": true,
     "**/target": true,
     "**/.gradle": true
-  }
+  },
+  "chat.agent.enabled": true
 }
