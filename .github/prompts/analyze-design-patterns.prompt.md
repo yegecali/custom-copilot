@@ -1,6 +1,5 @@
 ---
 description: "Analizar código Java e identificar patrones de diseño aplicables, documentar efectividad"
-mode: agent
 tools:
   - semantic_search
   - read_file
